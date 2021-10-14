@@ -1,16 +1,14 @@
 package com.carassurance;
-
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
-
 import androidx.annotation.NonNull;
-
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -19,6 +17,8 @@ import com.google.android.material.navigation.NavigationView;
 
 public class BaseActivity  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     protected FrameLayout frameLayout;
+    protected boolean urgency = true;
+    private ConstraintLayout mUrgencyLayout;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
@@ -36,13 +36,21 @@ public class BaseActivity  extends AppCompatActivity implements NavigationView.O
         /*----------------------Toolbar----------------------*/
         setSupportActionBar(mToolbar);
 
-
         /*----------------------Nav_View----------------------*/
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
         toggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        /*-------------------UrgencyLayout--------------------*/
+        mUrgencyLayout = (ConstraintLayout) findViewById(R.id.urgency_layout);
+
+        if (urgency == true) {
+            mUrgencyLayout.setVisibility(View.VISIBLE);
+        }else{
+            mUrgencyLayout.setVisibility(View.GONE);
+        }
 
     }
 
@@ -70,13 +78,6 @@ public class BaseActivity  extends AppCompatActivity implements NavigationView.O
         return super.onOptionsItemSelected(menuItem);
     }
 
-
-    /**
-     * Start an activity when an item is selected
-     *
-     * @param item
-     * @return
-     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return true;
