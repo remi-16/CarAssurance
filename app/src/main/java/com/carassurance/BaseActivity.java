@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
+import com.carassurance.encryption.HashPassword;
 import com.google.android.material.navigation.NavigationView;
 
 public class BaseActivity  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -51,6 +52,8 @@ public class BaseActivity  extends AppCompatActivity implements NavigationView.O
         }else{
             mUrgencyLayout.setVisibility(View.GONE);
         }
+        HashPassword hash = new HashPassword();
+        hash.hash("passord1234");
 
     }
 
