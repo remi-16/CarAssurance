@@ -5,7 +5,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.util.ArrayList;
 
 @Entity (foreignKeys = @ForeignKey(entity = UserEntity.class, parentColumns = "user_id", childColumns = "owner_id"))
 public class CarEntity {

@@ -1,4 +1,6 @@
 package com.carassurance;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,9 +18,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.carassurance.encryption.HashPassword;
 import com.google.android.material.navigation.NavigationView;
 
-public class BaseActivity  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public abstract class BaseActivity  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    /**
+     * staylogged = 0 --> neverconnected
+     * staylogged = 1 --> disconected
+     * staylogged = 2 --> connected
+     */
+   // protected int staylogged =0;
+    protected SharedPreferences sp ;
     protected FrameLayout frameLayout;
     protected boolean urgency = true;
+    protected ActionBarDrawerToggle toggle;
     private ConstraintLayout mUrgencyLayout;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -38,7 +48,7 @@ public class BaseActivity  extends AppCompatActivity implements NavigationView.O
         setSupportActionBar(mToolbar);
 
         /*----------------------Nav_View----------------------*/
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
         toggle.syncState();
@@ -52,8 +62,12 @@ public class BaseActivity  extends AppCompatActivity implements NavigationView.O
         }else{
             mUrgencyLayout.setVisibility(View.GONE);
         }
+
+        toggle.syncState();
+        frameLayout = findViewById(R.id.main_frame_layout);
         HashPassword hash = new HashPassword();
         hash.hash("passord1234");
+
 
     }
 
@@ -83,8 +97,25 @@ public class BaseActivity  extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         return true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+/*
+    @Override
+    protected void onDestroy() {
+        if (staylogged==2){
+            sp .edit().putBoolean( " logged " , false );
+        }
+
+        super.onDestroy();
+    }*/
 
 
 }

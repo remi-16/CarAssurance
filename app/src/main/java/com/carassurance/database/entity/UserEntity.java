@@ -79,5 +79,19 @@ public class UserEntity {
         this.cars = cars;
     }
 
+    @Override
+    public boolean equals (Object object) {
+        boolean result = false;
+        if (object == null || object.getClass() != getClass()) {
+            result = false;
+        } else {
+            UserEntity user = (UserEntity) object;
+            if (this.email.equals(user.getEmail()) && this.password.equals(user.getPassword())) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
 
 }

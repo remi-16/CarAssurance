@@ -7,4 +7,6 @@
     <string name="test">TEST</string>
     <string name="setting">Setting</string>
     <string name="carzurancephoto">carzurancephoto</string>
+    <string name="edit_username">your username</string>
+    <string name="edit_password">your password</string>
 </resources>
