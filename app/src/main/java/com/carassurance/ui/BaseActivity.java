@@ -1,4 +1,4 @@
-package com.carassurance;
+package com.carassurance.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
+import com.carassurance.R;
 import com.carassurance.encryption.HashPassword;
 import com.google.android.material.navigation.NavigationView;
 
@@ -27,9 +28,8 @@ public abstract class BaseActivity  extends AppCompatActivity implements Navigat
    // protected int staylogged =0;
     protected SharedPreferences sp ;
     protected FrameLayout frameLayout;
-    protected boolean urgency = true;
     protected ActionBarDrawerToggle toggle;
-    private ConstraintLayout mUrgencyLayout;
+    protected ConstraintLayout mUrgencyLayout;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
@@ -56,12 +56,8 @@ public abstract class BaseActivity  extends AppCompatActivity implements Navigat
 
         /*-------------------UrgencyLayout--------------------*/
         mUrgencyLayout = (ConstraintLayout) findViewById(R.id.urgency_layout);
+        mUrgencyLayout.setVisibility(View.VISIBLE);
 
-        if (urgency == true) {
-            mUrgencyLayout.setVisibility(View.VISIBLE);
-        }else{
-            mUrgencyLayout.setVisibility(View.GONE);
-        }
 
         toggle.syncState();
         frameLayout = findViewById(R.id.main_frame_layout);

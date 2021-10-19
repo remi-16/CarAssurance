@@ -1,14 +1,14 @@
-package com.carassurance;
+package com.carassurance.ui;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.carassurance.R;
 import com.carassurance.database.entity.UserEntity;
 import com.carassurance.encryption.HashPassword;
 
@@ -27,11 +27,9 @@ public class LoginActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         getLayoutInflater().inflate(R.layout.activity_login, frameLayout);
-
         toggle.setDrawerIndicatorEnabled(false);
+        mUrgencyLayout.setVisibility(View.VISIBLE);
 
         username = findViewById(R.id.edit_username);
         password = findViewById(R.id.edit_password);
@@ -61,7 +59,7 @@ public class LoginActivity extends BaseActivity{
                        // staylogged=2;
                     }
                     goToApp();
-                    sp .edit().putBoolean( " logged " , true ).apply();
+                    //sp .edit().putBoolean( " logged " , true ).apply();
                 }else{
 
                 }

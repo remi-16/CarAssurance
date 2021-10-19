@@ -1,8 +1,9 @@
-package com.carassurance;
+package com.carassurance.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+
+import com.carassurance.R;
 
 
 public class MainActivity extends BaseActivity{

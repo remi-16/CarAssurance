@@ -9,4 +9,7 @@
     <string name="carzurancephoto">carzurancephoto</string>
     <string name="edit_username">your username</string>
     <string name="edit_password">your password</string>
+    <string name="buttonCars">Mes véhicules</string>
+    <string name="buttonReport">Déclarer un sinistre</string>
+    <string name="buttonIncidents">Mes Incidents</string>
 </resources>
