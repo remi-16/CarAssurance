@@ -4,26 +4,26 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.carassurance.database.AppDatabase;
-import com.carassurance.database.entity.UserEntity;
+import com.carassurance.database.entity.CarEntity;
+
 import com.carassurance.util.OnAsyncEventListener;
 
-
-public class CreateUser extends AsyncTask<UserEntity, Void, Void> {
+public class CreateCar extends AsyncTask<CarEntity, Void, Void> {
 
     private AppDatabase database;
     private OnAsyncEventListener callback;
     private Exception exception;
 
-    public CreateUser(Context context, OnAsyncEventListener callback) {
+    public CreateCar(Context context, OnAsyncEventListener callback) {
         database = AppDatabase.getInstance(context);
         this.callback = callback;
     }
 
     @Override
-    protected Void doInBackground(UserEntity... params) {
+    protected Void doInBackground(CarEntity... params) {
         try {
-            for (UserEntity user : params)
-                database.userDao().insert(user);
+            for (CarEntity car : params)
+                database.carDao().insert(car);
         } catch (Exception e) {
             exception = e;
         }

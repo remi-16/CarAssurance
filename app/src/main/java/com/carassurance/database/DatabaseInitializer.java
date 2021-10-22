@@ -3,7 +3,9 @@ package com.carassurance.database;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.entity.UserEntity;
+import com.carassurance.encryption.HashPassword;
 
 public class DatabaseInitializer {
 
@@ -15,19 +17,25 @@ public class DatabaseInitializer {
         task.execute();
     }
 
-    private static void addClient(final AppDatabase db, final String email, final String firstName,
-                                  final String lastName) {
-        UserEntity client = new UserEntity(email, firstName, lastName, "");
+    private static void addUser(final AppDatabase db,  final String email, final String firstName,
+                                  final String lastName, final String password) {
+        UserEntity client = new UserEntity(email, firstName, lastName, password);
         db.userDao().insert(client);
+    }
+    private static void addCar(final AppDatabase db,  final String plate, final String brand,
+                                  final String model, final String Color, final String owner) {
+        CarEntity car = new CarEntity(plate, brand, model, Color, owner);
+        db.carDao().insert(car);
     }
 
     private static void populateWithTestData(AppDatabase db) {
-      //  db.userDao().deleteAll();
+        HashPassword hashPassword = new HashPassword();
+        db.userDao().deleteAll();
+        db.carDao().deleteAll();
 
-        addClient(db, "michel.platini@fifa.com", "Michel", "Platini");
-        addClient(db, "sepp.blatter@fifa.com", "Sepp", "Blatter");
-        addClient(db, "ebbe.schwartz@fifa.com", "Ebbe", "Schwartz");
-        addClient(db, "aleksander.ceferin@fifa.com", "Aleksander", "Ceferin");
+        addUser(db, "remi.cohu@gmail.com","Cohu","Rémi", hashPassword.hash("Soleil123"));
+        addCar(db,"FR339484", "Mazda", "dynamyx","Blanc", "remi.cohu@gmail.com" );
+
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {

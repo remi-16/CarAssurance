@@ -3,13 +3,26 @@ package com.carassurance.database.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-@Entity (foreignKeys = @ForeignKey(entity = UserEntity.class, parentColumns = "user_id", childColumns = "owner_id"))
+@Entity (tableName = "cars",
+        foreignKeys =
+        @ForeignKey(
+                entity = UserEntity.class,
+                parentColumns = "email",
+                childColumns = "owner",
+                onDelete = ForeignKey.CASCADE
+        ),
+        indices = {
+                @Index(
+                        value = {"owner"}
+                )})
 public class CarEntity {
-    @PrimaryKey
-    private int car_id;
+    @PrimaryKey (autoGenerate = true)
+    private long id;
 
     @ColumnInfo(name = "number_plate")
     private String  plate;
@@ -23,23 +36,32 @@ public class CarEntity {
     @ColumnInfo(name = "color")
     private String color;
 
-    @ColumnInfo(name = "owner_id")
-    private int owner_id;
+    @ColumnInfo(name = "owner")
+    private String owner;
 
-    public CarEntity(String plate, String brand, String model, String color, int owner_id) {
+    @Ignore
+    public CarEntity(){
+
+    }
+
+    public CarEntity(String plate, String brand, String model, String color, String owner) {
         this.plate = plate;
         this.brand = brand;
         this.model = model;
         this.color = color;
-        this.owner_id = owner_id;
+        this.owner = owner;
     }
 
-    public int getCar_id() {
-        return car_id;
+    public Long getId() {
+        return id;
     }
 
-    public int getOwner_id() {
-        return owner_id;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 
     public String getPlate() {

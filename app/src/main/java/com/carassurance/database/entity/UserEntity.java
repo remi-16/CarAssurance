@@ -3,17 +3,16 @@ package com.carassurance.database.entity;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 
 
-@Entity(tableName = "users")
+@Entity(tableName = "users", primaryKeys = {"email"})
 public class UserEntity {
-    @PrimaryKey (autoGenerate = true)
-    private int user_id;
 
-    @ColumnInfo(name = "email")
+    @NonNull
     private String email;
 
     @ColumnInfo(name = "lastname")
@@ -25,19 +24,18 @@ public class UserEntity {
     @ColumnInfo(name = "password")
     private String password;
 
-    private ArrayList<CarEntity> cars;
+   // private ArrayList<CarEntity> cars;
 
 
+    @Ignore
+    public UserEntity(){
 
+    }
     public UserEntity(@NonNull String email, @NonNull String lastname, @NonNull String firstname, @NonNull String password) {
         this.email = email;
         this.lastname = lastname;
         this.firstname = firstname;
         this.password = password;
-    }
-
-    public int getUser_id() {
-        return user_id;
     }
 
 
@@ -73,13 +71,13 @@ public class UserEntity {
         this.password = password;
     }
 
-    public ArrayList<CarEntity> getCars() {
+   /* public ArrayList<CarEntity> getCars() {
         return cars;
     }
 
     public void setCars(ArrayList<CarEntity> cars) {
         this.cars = cars;
-    }
+    }*/
 
     @Override
     public boolean equals (Object object) {

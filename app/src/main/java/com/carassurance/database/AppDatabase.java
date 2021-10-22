@@ -12,6 +12,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import com.carassurance.database.dao.CarDao;
 import com.carassurance.database.dao.UserDao;
 import com.carassurance.database.entity.UserEntity;
 
@@ -26,6 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "intro-database";
 
     public abstract UserDao userDao();
+    public abstract CarDao carDao();
 
     private final MutableLiveData<Boolean> isDatabaseCreated = new MutableLiveData<>();
 

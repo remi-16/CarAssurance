@@ -28,7 +28,7 @@ public class UserRepository {
         return instance;
     }
 
-    public LiveData<UserEntity> getClient(final String email, Context context) {
+    public LiveData<UserEntity> getUser(final String email, Context context) {
         return AppDatabase.getInstance(context).userDao().getByEmail(email);
     }
 
