@@ -1,14 +1,16 @@
 package com.carassurance.database.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 
-@Entity
+
+@Entity(tableName = "users")
 public class UserEntity {
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     private int user_id;
 
     @ColumnInfo(name = "email")
@@ -27,7 +29,7 @@ public class UserEntity {
 
 
 
-    public UserEntity(String email, String lastname, String firstname, String password) {
+    public UserEntity(@NonNull String email, @NonNull String lastname, @NonNull String firstname, @NonNull String password) {
         this.email = email;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -43,7 +45,7 @@ public class UserEntity {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail( @NonNull String email) {
         this.email = email;
     }
 
@@ -51,7 +53,7 @@ public class UserEntity {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public void setLastname(@NonNull String lastname) {
         this.lastname = lastname;
     }
 
@@ -59,7 +61,7 @@ public class UserEntity {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstname( @NonNull String firstname) {
         this.firstname = firstname;
     }
 
@@ -67,7 +69,7 @@ public class UserEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NonNull String password) {
         this.password = password;
     }
 
