@@ -1,11 +1,12 @@
 package com.carassurance.database.repository;
 
+import android.app.Application;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
 import com.carassurance.database.AppDatabase;
-import com.carassurance.database.async.CreateCar;
+import com.carassurance.database.async.car.CreateCar;
 import com.carassurance.database.entity.CarEntity;
 import com.carassurance.util.OnAsyncEventListener;
 
@@ -30,16 +31,16 @@ public class CarRepository {
             return instance;
         }
 
-        public LiveData<CarEntity> getCar(final String plate, Context context) {
-            return AppDatabase.getInstance(context).carDao().getByPlate(plate);
+        public LiveData<CarEntity> getCar(final String plate, Application application) {
+            return AppDatabase.getInstance(application).carDao().getByPlate(plate);
         }
 
-        public LiveData<List<CarEntity>> getAllCar(Context context) {
-            return AppDatabase.getInstance(context).carDao().getAll();
+        public LiveData<List<CarEntity>> getAllCar(Application application) {
+            return AppDatabase.getInstance(application).carDao().getAllCar();
         }
 
-        public void insert(final CarEntity car, OnAsyncEventListener callback, Context context) {
-            new CreateCar(context, callback).execute(car);
+        public void insert(final CarEntity car, OnAsyncEventListener callback, Application application) {
+            new CreateCar(application, callback).execute(car);
         }
 
     }

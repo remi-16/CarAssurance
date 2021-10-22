@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.carassurance.R;
 import com.carassurance.database.entity.UserEntity;
 import com.carassurance.encryption.HashPassword;
+import com.carassurance.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,8 @@ public class LoginActivity extends BaseActivity{
     private EditText password;
     private Button login;
     private CheckBox stayConnect;
+    private UserViewModel viewModel;
+    private UserEntity user;
 
 
 
@@ -35,6 +39,9 @@ public class LoginActivity extends BaseActivity{
         password = findViewById(R.id.edit_password);
         login = findViewById(R.id.buttonLogin);
         stayConnect = findViewById(R.id.stayConnected);
+
+
+
       //  sp = getSharedPreferences( "login" , MODE_PRIVATE );
 
        /* if (sp.getBoolean("login")){
@@ -46,26 +53,30 @@ public class LoginActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
 
-                /*Simulation DB users*/
-                ArrayList<UserEntity> listUser = new ArrayList<>();
+                initialUser(username.getText().toString());
+
+
                 HashPassword hashPassword = new HashPassword();
-                listUser.add(new UserEntity("remi.cohu@gmail.com","Cohu","Rémi", hashPassword.hash("Soleil123")));
 
-                boolean found = listUser.stream()
-                        .anyMatch(p -> p.getEmail().equals(username.getText().toString()) && p.getPassword().equals((hashPassword.hash(password.getText().toString()))));
 
-                if(found==true){
-                    if (stayConnect.isActivated()){
-                       // staylogged=2;
-                    }
+                if(user.getPassword().equals(hashPassword.hash(password.getText().toString()))){
                     goToApp();
-                    //sp .edit().putBoolean( " logged " , true ).apply();
-                }else{
-
                 }
+
             }
         });
 
+    }
+
+    public void initialUser(String email){
+        UserViewModel.Factory factory = new UserViewModel.Factory(
+                getApplication(), email);
+        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
+        viewModel.getUser().observe(this, userEntity -> {
+            if (userEntity != null) {
+                user = userEntity;
+            }
+        });
     }
 
     public void goToApp(){

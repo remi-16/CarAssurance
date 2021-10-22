@@ -12,10 +12,10 @@ import java.util.List;
 /**
  * https://developer.android.com/reference/android/arch/persistence/room/Relation
  */
-public class UsersWithCars {
+public class CarsWithUser {
     @Embedded
     public UserEntity user;
 
     @Relation(parentColumn = "email", entityColumn = "owner", entity = CarEntity.class)
-    public List<CarEntity> accounts;
+    public List<CarEntity> cars;
 }

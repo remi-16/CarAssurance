@@ -1,29 +1,29 @@
-package com.carassurance.database.async;
+package com.carassurance.database.async.car;
 
-import android.content.Context;
+import android.app.Application;
 import android.os.AsyncTask;
 
-import com.carassurance.database.AppDatabase;
-import com.carassurance.database.entity.UserEntity;
+import com.carassurance.BaseApp;
+import com.carassurance.database.entity.CarEntity;
 import com.carassurance.util.OnAsyncEventListener;
 
+public class DeleteCar extends AsyncTask<CarEntity, Void, Void> {
 
-public class CreateUser extends AsyncTask<UserEntity, Void, Void> {
-
-    private AppDatabase database;
+    private Application application;
     private OnAsyncEventListener callback;
     private Exception exception;
 
-    public CreateUser(Context context, OnAsyncEventListener callback) {
-        database = AppDatabase.getInstance(context);
+    public DeleteCar(Application application, OnAsyncEventListener callback) {
+        this.application = application;
         this.callback = callback;
     }
 
     @Override
-    protected Void doInBackground(UserEntity... params) {
+    protected Void doInBackground(CarEntity... params) {
         try {
-            for (UserEntity user : params)
-                database.userDao().insert(user);
+            for (CarEntity car : params)
+                ((BaseApp) application).getDatabase().carDao()
+                        .delete(car);
         } catch (Exception e) {
             exception = e;
         }

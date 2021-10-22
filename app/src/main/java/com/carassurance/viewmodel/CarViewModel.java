@@ -10,6 +10,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.carassurance.BaseApp;
 import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.entity.UserEntity;
 import com.carassurance.database.repository.CarRepository;
@@ -20,7 +21,7 @@ public class CarViewModel extends AndroidViewModel {
 
     private CarRepository repository;
 
-    private Context applicationContext;
+    private Application application;
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
     private final MediatorLiveData<CarEntity> observableCar;
@@ -31,13 +32,13 @@ public class CarViewModel extends AndroidViewModel {
 
         repository = carRepository;
 
-        applicationContext = application.getApplicationContext();
+        this.application = application;
 
         observableCar = new MediatorLiveData<>();
         // set by default null, until we get data from the database.
         observableCar.setValue(null);
 
-        LiveData<CarEntity> car = repository.getCar(plate, applicationContext);
+        LiveData<CarEntity> car = repository.getCar(plate, application);
 
         // observe the changes of the client entity from the database and forward them
         observableCar.addSource(car, observableCar::setValue);
@@ -51,6 +52,7 @@ public class CarViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
+
         private final String plate;
 
         private final CarRepository repository;
@@ -58,7 +60,7 @@ public class CarViewModel extends AndroidViewModel {
         public Factory(@NonNull Application application, String plate) {
             this.application = application;
             this.plate = plate;
-            repository = CarRepository.getInstance();
+            repository = ((BaseApp) application).getCarRepository();
         }
 
         @Override
@@ -76,7 +78,7 @@ public class CarViewModel extends AndroidViewModel {
     }
 
     public void createClient(CarEntity car, OnAsyncEventListener callback) {
-        repository.insert(car, callback, applicationContext);
+        repository.insert(car, callback, application);
     }
 
 }

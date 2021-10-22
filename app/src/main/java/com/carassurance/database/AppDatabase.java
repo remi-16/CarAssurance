@@ -14,11 +14,13 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.carassurance.database.dao.CarDao;
+import com.carassurance.database.dao.IncidentDao;
 import com.carassurance.database.dao.UserDao;
+import com.carassurance.database.entity.CarEntity;
+import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.entity.UserEntity;
 
-
-@Database(entities = {UserEntity.class}, version = 1)
+@Database(entities = {UserEntity.class, CarEntity.class, IncidentEntity.class},  version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
@@ -29,8 +31,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
     public abstract CarDao carDao();
+    public abstract IncidentDao incidentDao();
 
-    private final MutableLiveData<Boolean> isDatabaseCreated = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
     public static AppDatabase getInstance(final Context context) {
         if (instance == null) {
@@ -58,12 +61,24 @@ public abstract class AppDatabase extends RoomDatabase {
                         super.onCreate(db);
                         Executors.newSingleThreadExecutor().execute(() -> {
                             AppDatabase database = AppDatabase.getInstance(appContext);
-                            DatabaseInitializer.populateDatabase(database);
+                            initializeDemoData(database);
                             // notify that the database was created and it's ready to be used
                             database.setDatabaseCreated();
                         });
                     }
                 }).build();
+    }
+
+    public static void initializeDemoData(final AppDatabase database) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            database.runInTransaction(() -> {
+                Log.i(TAG, "Wipe database.");
+                database.userDao().deleteAll();
+                database.carDao().deleteAll();
+
+                DatabaseInitializer.populateDatabase(database);
+            });
+        });
     }
 
     /**
@@ -77,10 +92,10 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     private void setDatabaseCreated(){
-        isDatabaseCreated.postValue(true);
+        mIsDatabaseCreated.postValue(true);
     }
 
     public LiveData<Boolean> getDatabaseCreated() {
-        return isDatabaseCreated;
+        return mIsDatabaseCreated;
     }
 }

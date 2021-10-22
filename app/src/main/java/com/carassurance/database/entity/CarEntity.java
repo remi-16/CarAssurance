@@ -20,9 +20,10 @@ import androidx.room.PrimaryKey;
                 @Index(
                         value = {"owner"}
                 )})
+
 public class CarEntity {
     @PrimaryKey (autoGenerate = true)
-    private long id;
+    private Long id;
 
     @ColumnInfo(name = "number_plate")
     private String  plate;

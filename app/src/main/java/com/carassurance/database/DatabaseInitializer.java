@@ -4,8 +4,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.carassurance.database.entity.CarEntity;
+import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.entity.UserEntity;
 import com.carassurance.encryption.HashPassword;
+
+import java.util.Date;
 
 public class DatabaseInitializer {
 
@@ -28,13 +31,22 @@ public class DatabaseInitializer {
         db.carDao().insert(car);
     }
 
+    private static void addIncident(final AppDatabase db,   final String client,
+                               final long car_id, final String location, final String date, final String type, final Boolean injured, final String urlMoreInfo, final String desciption) {
+        IncidentEntity incident = new IncidentEntity(client, car_id, location, date, type, injured,urlMoreInfo,desciption);
+        db.incidentDao().insert(incident);
+    }
+
     private static void populateWithTestData(AppDatabase db) {
         HashPassword hashPassword = new HashPassword();
         db.userDao().deleteAll();
         db.carDao().deleteAll();
+        db.incidentDao().deleteAll();
 
         addUser(db, "remi.cohu@gmail.com","Cohu","Rémi", hashPassword.hash("Soleil123"));
         addCar(db,"FR339484", "Mazda", "dynamyx","Blanc", "remi.cohu@gmail.com" );
+        addIncident(db,"remi.cohu@gmail.com", 1,"Rte du centre 102, 1723 Marly","22.10.2021", "collision",false,null,"collision avec un mur");
+        addIncident(db,"remi.cohu@gmail.com", 1,"Rte du centre 102, 1723 Marly","22.10.2021","vol", false,null,null);
 
     }
 

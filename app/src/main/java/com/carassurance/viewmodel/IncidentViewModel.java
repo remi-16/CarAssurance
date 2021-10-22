@@ -11,36 +11,37 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.carassurance.BaseApp;
+import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.entity.UserEntity;
+import com.carassurance.database.repository.IncidentRepository;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.util.OnAsyncEventListener;
 
+public class IncidentViewModel extends AndroidViewModel {
 
-public class UserViewModel extends AndroidViewModel {
-
-    private UserRepository repository;
+    private IncidentRepository repository;
 
     private Application application;
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
-    private final MediatorLiveData<UserEntity> observableUser;
+    private final MediatorLiveData<IncidentEntity> observableIncident;
 
-    public UserViewModel(@NonNull Application application,
-                           final String email, UserRepository userRepository) {
+    public IncidentViewModel(@NonNull Application application,
+                         final Long id, IncidentRepository incidentRepository) {
         super(application);
+
+        repository = incidentRepository;
 
         this.application = application;
 
-        repository = userRepository;
-
-        observableUser = new MediatorLiveData<>();
+        observableIncident = new MediatorLiveData<>();
         // set by default null, until we get data from the database.
-        observableUser.setValue(null);
+        observableIncident.setValue(null);
 
-        LiveData<UserEntity> client = repository.getUser(email, application);
+        LiveData<IncidentEntity> incident = repository.getIncidentById(id, application);
 
         // observe the changes of the client entity from the database and forward them
-        observableUser.addSource(client, observableUser::setValue);
+        observableIncident.addSource(incident, observableIncident::setValue);
     }
 
     /**
@@ -51,32 +52,32 @@ public class UserViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final String email;
+        private final long id;
 
-        private final UserRepository repository;
+        private final IncidentRepository repository;
 
-        public Factory(@NonNull Application application, String email) {
+        public Factory(@NonNull Application application, long id) {
             this.application = application;
-            this.email = email;
-            repository = ((BaseApp) application).getUserRepository();
+            this.id = id;
+            repository = ((BaseApp) application).getIncidentRepository();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new UserViewModel(application, email, repository);
+            return (T) new IncidentViewModel(application, id, repository);
         }
     }
 
     /**
      * Expose the LiveData ClientEntity query so the UI can observe it.
      */
-    public LiveData<UserEntity> getUser() {
-        return observableUser;
+    public LiveData<IncidentEntity> getIncident() {
+        return observableIncident;
     }
 
-    public void createUser(UserEntity user, OnAsyncEventListener callback) {
-        repository.insert(user, callback, application);
+    public void createIncident(IncidentEntity incident, OnAsyncEventListener callback) {
+        repository.insert(incident, callback, application);
     }
 
 }
