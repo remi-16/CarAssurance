@@ -73,7 +73,7 @@ public class CarViewModel extends AndroidViewModel {
     /**
      * Expose the LiveData ClientEntity query so the UI can observe it.
      */
-    public LiveData<CarEntity> getUser() {
+    public LiveData<CarEntity> getCar() {
         return observableCar;
     }
 

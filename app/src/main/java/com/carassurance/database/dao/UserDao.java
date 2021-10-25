@@ -13,8 +13,8 @@ import com.carassurance.database.entity.UserEntity;
 @Dao
 public interface UserDao {
 
-    @Query("SELECT * FROM users WHERE email = :email")
-    LiveData<UserEntity> getByEmail(String email);
+    @Query("SELECT * FROM users WHERE email = :id")
+    LiveData<UserEntity> getById(String id);
 
     @Query("SELECT * FROM users")
     LiveData<List<UserEntity>> getAll();

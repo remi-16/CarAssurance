@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.carassurance.BaseApp;
 import com.carassurance.database.AppDatabase;
 import com.carassurance.database.async.user.CreateUser;
 import com.carassurance.database.entity.UserEntity;
@@ -29,12 +30,12 @@ public class UserRepository {
         return instance;
     }
 
-    public LiveData<UserEntity> getUser(final String email, Application application) {
-        return AppDatabase.getInstance(application).userDao().getByEmail(email);
+    public LiveData<UserEntity> getUser(final String id, Application application) {
+        return ((BaseApp) application).getDatabase().userDao().getById(id);
     }
 
     public LiveData<List<UserEntity>> getAllUsers(Application application) {
-        return AppDatabase.getInstance(application).userDao().getAll();
+        return ((BaseApp) application).getDatabase().userDao().getAll();
     }
 
     public void insert(final UserEntity user, OnAsyncEventListener callback, Application application) {

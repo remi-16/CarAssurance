@@ -24,7 +24,7 @@ public class UserEntity {
     @ColumnInfo(name = "password")
     private String password;
 
-   // private ArrayList<CarEntity> cars;
+
 
 
     @Ignore

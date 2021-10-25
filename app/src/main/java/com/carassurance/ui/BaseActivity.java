@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import com.carassurance.R;
+import com.carassurance.database.entity.UserEntity;
 import com.carassurance.encryption.HashPassword;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,10 +27,13 @@ public abstract class BaseActivity  extends AppCompatActivity implements Navigat
      * staylogged = 2 --> connected
      */
    // protected int staylogged =0;
+    public static final String PREFS_NAME = "SharedPrefs";
+    public static final String PREFS_USER = "LoggedIn";
     protected SharedPreferences sp ;
     protected FrameLayout frameLayout;
     protected ActionBarDrawerToggle toggle;
     protected ConstraintLayout mUrgencyLayout;
+    protected UserEntity user;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;

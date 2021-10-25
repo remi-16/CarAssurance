@@ -23,6 +23,7 @@ import com.carassurance.database.entity.UserEntity;
 @Database(entities = {UserEntity.class, CarEntity.class, IncidentEntity.class},  version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
+
     private static final String TAG = "AppDatabase";
 
     private static AppDatabase instance;
@@ -56,12 +57,14 @@ public abstract class AppDatabase extends RoomDatabase {
         Log.i(TAG, "Database will be initialized.");
         return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
                 .addCallback(new Callback() {
+
+
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
                         Executors.newSingleThreadExecutor().execute(() -> {
                             AppDatabase database = AppDatabase.getInstance(appContext);
-                            initializeDemoData(database);
+                            initializeData(database);
                             // notify that the database was created and it's ready to be used
                             database.setDatabaseCreated();
                         });
@@ -69,12 +72,13 @@ public abstract class AppDatabase extends RoomDatabase {
                 }).build();
     }
 
-    public static void initializeDemoData(final AppDatabase database) {
+    public static void initializeData(final AppDatabase database) {
         Executors.newSingleThreadExecutor().execute(() -> {
             database.runInTransaction(() -> {
                 Log.i(TAG, "Wipe database.");
                 database.userDao().deleteAll();
                 database.carDao().deleteAll();
+                database.incidentDao().deleteAll();
 
                 DatabaseInitializer.populateDatabase(database);
             });

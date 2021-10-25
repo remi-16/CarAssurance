@@ -26,7 +26,7 @@ public class UserViewModel extends AndroidViewModel {
     private final MediatorLiveData<UserEntity> observableUser;
 
     public UserViewModel(@NonNull Application application,
-                           final String email, UserRepository userRepository) {
+                           final String userId, UserRepository userRepository) {
         super(application);
 
         this.application = application;
@@ -37,10 +37,10 @@ public class UserViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableUser.setValue(null);
 
-        LiveData<UserEntity> client = repository.getUser(email, application);
+        LiveData<UserEntity> user = repository.getUser(userId, application);
 
         // observe the changes of the client entity from the database and forward them
-        observableUser.addSource(client, observableUser::setValue);
+        observableUser.addSource(user, observableUser::setValue);
     }
 
     /**
@@ -51,20 +51,20 @@ public class UserViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final String email;
+        private final String userId;
 
         private final UserRepository repository;
 
-        public Factory(@NonNull Application application, String email) {
+        public Factory(@NonNull Application application, String userId) {
             this.application = application;
-            this.email = email;
+            this.userId = userId;
             repository = ((BaseApp) application).getUserRepository();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new UserViewModel(application, email, repository);
+            return (T) new UserViewModel(application, userId, repository);
         }
     }
 

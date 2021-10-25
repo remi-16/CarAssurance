@@ -22,7 +22,7 @@ public interface IncidentDao {
     @Query("SELECT * FROM incidents WHERE client = :emailClient")
     LiveData<List<IncidentEntity>> getAllIncidentsByClient(String emailClient);
 
-    @Query("SELECT * FROM cars WHERE id = :id")
+    @Query("SELECT * FROM incidents WHERE id = :id")
     LiveData<IncidentEntity> getById(Long id);
 
     @Insert

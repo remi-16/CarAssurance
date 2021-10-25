@@ -22,8 +22,8 @@ public class DatabaseInitializer {
 
     private static void addUser(final AppDatabase db,  final String email, final String firstName,
                                   final String lastName, final String password) {
-        UserEntity client = new UserEntity(email, firstName, lastName, password);
-        db.userDao().insert(client);
+        UserEntity user = new UserEntity(email, firstName, lastName, password);
+        db.userDao().insert(user);
     }
     private static void addCar(final AppDatabase db,  final String plate, final String brand,
                                   final String model, final String Color, final String owner) {
@@ -39,9 +39,11 @@ public class DatabaseInitializer {
 
     private static void populateWithTestData(AppDatabase db) {
         HashPassword hashPassword = new HashPassword();
-        db.userDao().deleteAll();
-        db.carDao().deleteAll();
         db.incidentDao().deleteAll();
+        db.carDao().deleteAll();
+        db.userDao().deleteAll();
+
+
 
         addUser(db, "remi.cohu@gmail.com","Cohu","Rémi", hashPassword.hash("Soleil123"));
         addCar(db,"FR339484", "Mazda", "dynamyx","Blanc", "remi.cohu@gmail.com" );
