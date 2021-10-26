@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.carassurance.R;
+import com.carassurance.ui.report.ReportActivity;
 
 
 public class MainActivity extends BaseActivity{
@@ -15,7 +16,11 @@ public class MainActivity extends BaseActivity{
 
         getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
         Intent intent = null;
-        intent = new Intent(this, LoginActivity.class);
+
+        //Pour test Matt
+        intent = new Intent(this, ReportActivity.class);
+        //intent = new Intent(this, LoginActivity.class);
+
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();

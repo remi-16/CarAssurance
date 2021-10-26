@@ -14,4 +14,6 @@
     <string name="buttonIncidents">Mes Incidents</string>
     <string name="error_invalid_email">email invalide</string>
     <string name="error_incorrect_password">mot de passe incorrecte</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
