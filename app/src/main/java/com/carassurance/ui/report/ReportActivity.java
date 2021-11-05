@@ -12,6 +12,8 @@ import com.carassurance.R;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.report.fragments.IncidentTypeFragment;
 
+import java.util.List;
+
 
 public class ReportActivity extends BaseActivity {
 
@@ -20,9 +22,12 @@ public class ReportActivity extends BaseActivity {
     private Button mBackButton;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -39,8 +44,6 @@ public class ReportActivity extends BaseActivity {
         mCancelButton = findViewById(R.id.buttonCancel);
         mNextButton = findViewById(R.id.buttonNext);
         mBackButton = findViewById(R.id.buttonBack);
-
-
 
 
 
