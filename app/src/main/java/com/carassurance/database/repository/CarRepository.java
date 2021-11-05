@@ -39,6 +39,10 @@ public class CarRepository {
             return AppDatabase.getInstance(application).carDao().getAllCar();
         }
 
+        public LiveData<List<CarEntity>> getAllCarByOwner(final String owner, Application application) {
+             return AppDatabase.getInstance(application).carDao().getAllCarByOwner(owner);
+        }
+
         public void insert(final CarEntity car, OnAsyncEventListener callback, Application application) {
             new CreateCar(application, callback).execute(car);
         }

@@ -18,6 +18,9 @@ public interface CarDao {
     @Query("SELECT * FROM cars")
     LiveData<List<CarEntity>> getAllCar();
 
+    @Query("SELECT * FROM cars Where owner =:owner")
+    LiveData<List<CarEntity>> getAllCarByOwner(String owner);
+
     @Query("SELECT * FROM cars WHERE number_plate = :plate")
     LiveData<CarEntity> getByPlate(String plate);
 

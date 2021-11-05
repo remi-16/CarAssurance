@@ -17,6 +17,8 @@ import com.carassurance.database.repository.CarRepository;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.util.OnAsyncEventListener;
 
+import java.util.List;
+
 public class CarViewModel extends AndroidViewModel {
 
     private CarRepository repository;
@@ -76,6 +78,7 @@ public class CarViewModel extends AndroidViewModel {
     public LiveData<CarEntity> getCar() {
         return observableCar;
     }
+
 
     public void createClient(CarEntity car, OnAsyncEventListener callback) {
         repository.insert(car, callback, application);

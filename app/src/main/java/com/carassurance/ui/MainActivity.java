@@ -18,8 +18,8 @@ public class MainActivity extends BaseActivity{
         Intent intent = null;
 
         //Pour test Matt
-        intent = new Intent(this, ReportActivity.class);
-        //intent = new Intent(this, LoginActivity.class);
+        //intent = new Intent(this, ReportActivity.class);
+        intent = new Intent(this, LoginActivity.class);
 
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);

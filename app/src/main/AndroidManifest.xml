@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarAssurance">
         <activity
+            android:name=".ui.cars.fragments.CarListViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -19,21 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginActivity">
-
-        </activity>
-        <activity android:name=".ui.AppActivity">
-
-        </activity>
-        <activity android:name=".ui.cars.CarsActivity">
-
-        </activity>
-        <activity android:name=".ui.report.ReportActivity">
-
-        </activity>
-        <activity android:name=".ui.incidents.IncidentsActivity">
-
-        </activity>
+        <activity android:name=".ui.LoginActivity"></activity>
+        <activity android:name=".ui.AppActivity"></activity>
+        <activity android:name=".ui.cars.CarsActivity"></activity>
+        <activity android:name=".ui.report.ReportActivity"></activity>
+        <activity android:name=".ui.incidents.IncidentsActivity"></activity>
     </application>
 
 </manifest>
