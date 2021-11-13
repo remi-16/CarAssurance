@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.carassurance.BaseApp;
 import com.carassurance.R;
@@ -25,6 +28,7 @@ import com.carassurance.viewmodel.CarListByOwnerViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CarsActivity extends BaseActivity {
 
@@ -33,6 +37,7 @@ public class CarsActivity extends BaseActivity {
     private CarRepository repository;
     private CarListByOwnerViewModel viewModel;
     private List<CarEntity> mCars;
+    private NavController navController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +55,21 @@ public class CarsActivity extends BaseActivity {
         repository = ((BaseApp) getApplication()).getCarRepository();
         initvar();
 
-        Fragment f = new CarFragment();
-        loadFragment(f);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.carfragmentContainerView);
+        navController = Objects.requireNonNull(navHostFragment).getNavController();
+
+        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
+        String useremail = settings.getString(PREFS_USER, null);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("useremail", useremail);
+        navController.setGraph(R.navigation.<you_nav_graph_xml>, bundle)
 
     }
-
+/*
     private void loadFragment(Fragment fragment) {
+
         // create a FragmentManager
         FragmentManager fm = getFragmentManager();
         // create a FragmentTransaction to begin the transaction and replace the Fragment
@@ -65,10 +79,10 @@ public class CarsActivity extends BaseActivity {
         ArrayList<CarEntity> cars = new ArrayList<>(mCars.size());
         cars.addAll(mCars);
         bundle.putSerializable("cars",  cars);
-        fragment.setArguments(bundle);*/
+        fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.carfragmentContainerView, fragment);
         fragmentTransaction.commit(); // save the changes
-    }
+    }*/
 
     private void initvar(){
         SharedPreferences settings = this.getSharedPreferences(BaseActivity.PREFS_NAME, 0);
