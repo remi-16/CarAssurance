@@ -9,7 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
 import com.carassurance.R;
+import com.carassurance.viewmodel.CarListViewModel;
 
 import java.util.zip.Inflater;
 
@@ -18,8 +22,11 @@ public class CustomAdapter extends BaseAdapter {
     String plate[];
     int icone[];
     LayoutInflater inflter;
+    private CarListViewModel viewModel;
+
 
     public CustomAdapter(Context applicationContext, String[] plate, int[] icone) {
+
         this.context = context;
         this.plate = plate;
         this.icone = icone;

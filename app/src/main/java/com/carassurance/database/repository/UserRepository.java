@@ -9,6 +9,7 @@ import com.carassurance.BaseApp;
 import com.carassurance.database.AppDatabase;
 import com.carassurance.database.async.user.CreateUser;
 import com.carassurance.database.entity.UserEntity;
+import com.carassurance.database.pojo.CarsWithUser;
 import com.carassurance.util.OnAsyncEventListener;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class UserRepository {
 
     public static UserRepository getInstance() {
         if (instance == null) {
-            synchronized (UserRepository.class) {
+            synchronized (CarRepository.class) {
                 if (instance == null) {
                     instance = new UserRepository();
                 }
@@ -32,6 +33,10 @@ public class UserRepository {
 
     public LiveData<UserEntity> getUser(final String id, Application application) {
         return ((BaseApp) application).getDatabase().userDao().getById(id);
+    }
+
+    public LiveData<CarsWithUser> getAllCarByOwner(final String id, Application application) {
+        return ((BaseApp) application).getDatabase().userDao().getAllCarByOwner(id);
     }
 
     public LiveData<List<UserEntity>> getAllUsers(Application application) {

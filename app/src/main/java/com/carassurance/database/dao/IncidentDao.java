@@ -7,10 +7,12 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.entity.IncidentEntity;
+import com.carassurance.database.pojo.IncidentWithCar;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ public interface IncidentDao {
     @Query("SELECT * FROM incidents")
     LiveData<List<IncidentEntity>> getAllIncidents();
 
+    //@Transaction
     @Query("SELECT * FROM incidents WHERE client = :emailClient")
     LiveData<List<IncidentEntity>> getAllIncidentsByClient(String emailClient);
 

@@ -10,6 +10,7 @@ import com.carassurance.database.async.car.CreateCar;
 import com.carassurance.database.async.incident.CreateIncident;
 import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.entity.IncidentEntity;
+import com.carassurance.database.pojo.IncidentWithCar;
 import com.carassurance.util.OnAsyncEventListener;
 
 import java.util.List;

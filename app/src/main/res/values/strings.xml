@@ -16,4 +16,5 @@
     <string name="error_incorrect_password">mot de passe incorrecte</string>
     <string name="report_type">Sélectionnez un type de sinistre</string>
     <string name="ajouter_une_voiture">Ajouter une voiture</string>
+    <string name="mes_sinistres">Mes Sinistres</string>
 </resources>

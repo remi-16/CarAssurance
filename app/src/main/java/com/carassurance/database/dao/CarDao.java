@@ -10,6 +10,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.carassurance.database.entity.CarEntity;
+import com.carassurance.database.pojo.CarsWithUser;
 
 import java.util.List;
 

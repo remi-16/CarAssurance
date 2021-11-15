@@ -6,9 +6,11 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.carassurance.database.entity.UserEntity;
+import com.carassurance.database.pojo.CarsWithUser;
 
 @Dao
 public interface UserDao {
@@ -18,6 +20,10 @@ public interface UserDao {
 
     @Query("SELECT * FROM users")
     LiveData<List<UserEntity>> getAll();
+
+    @Transaction
+    @Query("SELECT * FROM users WHERE email = :owner")
+    LiveData<CarsWithUser> getAllCarByOwner(String owner);
 
     @Insert
     void insert(UserEntity user) throws SQLiteConstraintException;
