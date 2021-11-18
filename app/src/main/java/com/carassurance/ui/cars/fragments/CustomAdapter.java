@@ -1,35 +1,36 @@
 package com.carassurance.ui.cars.fragments;
 
+import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-
 import com.carassurance.R;
+import com.carassurance.ui.cars.CarsActivity;
+import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.viewmodel.CarListViewModel;
-
-import java.util.zip.Inflater;
 
 public class CustomAdapter extends BaseAdapter {
     Context context;
     String plate[];
     int icone[];
     LayoutInflater inflter;
-    private CarListViewModel viewModel;
+    Activity activity;
 
 
-    public CustomAdapter(Context applicationContext, String[] plate, int[] icone) {
+    public CustomAdapter(Activity a, Context applicationContext, String[] plate, int[] icone) {
 
-        this.context = context;
+
+        this.activity = a;
         this.plate = plate;
         this.icone = icone;
+
         inflter = (LayoutInflater.from(applicationContext));
     }
 
@@ -53,8 +54,20 @@ public class CustomAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.activity_carlistview, null);
         TextView platetxt = (TextView) view.findViewById(R.id.plate);
         ImageView icon = (ImageView) view.findViewById(R.id.icon);
+        Button btn =(Button) view.findViewById(R.id.edit_car);
+        btn .setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToCars();
+            }
+        });
         platetxt.setText(plate[i]);
         icon.setImageResource(icone[i]);
         return view;
+    }
+
+    public void goToCars(){
+        Intent i = new Intent(activity, ReportActivity. class );
+        activity.startActivity(i);
     }
 }

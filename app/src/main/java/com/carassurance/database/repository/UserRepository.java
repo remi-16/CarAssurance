@@ -35,7 +35,7 @@ public class UserRepository {
         return ((BaseApp) application).getDatabase().userDao().getById(id);
     }
 
-    public LiveData<CarsWithUser> getAllCarByOwner(final String id, Application application) {
+    public LiveData<List<CarsWithUser>> getAllCarByOwner(final String id, Application application) {
         return ((BaseApp) application).getDatabase().userDao().getAllCarByOwner(id);
     }
 

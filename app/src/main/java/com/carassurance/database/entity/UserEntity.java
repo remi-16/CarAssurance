@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class UserEntity {
 
     @NonNull
+    @ColumnInfo(name = "email")
     private String email;
 
     @ColumnInfo(name = "lastname")
@@ -39,9 +40,11 @@ public class UserEntity {
     }
 
 
+    @NonNull
     public String getEmail() {
         return email;
     }
+
 
     public void setEmail( @NonNull String email) {
         this.email = email;
@@ -81,16 +84,15 @@ public class UserEntity {
 
     @Override
     public boolean equals (Object object) {
-        boolean result = false;
-        if (object == null || object.getClass() != getClass()) {
-            result = false;
-        } else {
-            UserEntity user = (UserEntity) object;
-            if (this.email.equals(user.getEmail()) && this.password.equals(user.getPassword())) {
-                result = true;
-            }
+        if (object == null) return false;
+        if (object == this) return true;
+        if (!(object instanceof UserEntity)) return false;
+        UserEntity user = (UserEntity) object;
+        if (this.email.equals(user.getEmail()) && this.password.equals(user.getPassword())) {
+            return  true;
         }
-        return result;
+
+      return false;
     }
 
 

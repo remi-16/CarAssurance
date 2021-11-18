@@ -17,11 +17,13 @@ import com.carassurance.R;
 import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.pojo.CarsWithUser;
 import com.carassurance.database.repository.CarRepository;
+import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.LoginActivity;
 import com.carassurance.ui.cars.fragments.CarFragment;
 import com.carassurance.viewmodel.CarListByOwnerViewModel;
 import com.carassurance.viewmodel.IncidentListByOwnerViewModel;
+import com.carassurance.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,54 +31,46 @@ import java.util.List;
 public class CarsActivity extends BaseActivity {
 
     private TextView textCar;
-    private CarRepository repository;
-    private CarListByOwnerViewModel viewModel;
-    private List<CarEntity> mCars;
+    private UserViewModel viewModel;
+    public List<CarEntity> mCars;
+    private UserRepository repository  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_cars, frameLayout);
+       // getLayoutInflater().inflate(R.layout.activity_cars, frameLayout);
         toggle.setDrawerIndicatorEnabled(false);
         mUrgencyLayout.setVisibility(View.GONE);
         textCar = (TextView) findViewById(R.id.MyCars);
-
-
-
-
+        repository= ((BaseApp) getApplication()).getUserRepository();
         initvar();
 
-        Fragment f = new CarFragment();
-        loadFragment(f);
 
     }
 
     private void loadFragment(Fragment fragment) {
         // create a FragmentManager
         FragmentManager fm = getFragmentManager();
-        // create a FragmentTransaction to begin the transaction and replace the Fragment
+
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        // replace the FrameLayout with new Fragment
-        /*  Bundle bundle = new Bundle();
-        ArrayList<CarEntity> cars = new ArrayList<>(mCars.size());
-        cars.addAll(mCars);
-        bundle.putSerializable("cars",  cars);
-        fragment.setArguments(bundle);*/
+
         fragmentTransaction.replace(R.id.carfragmentContainerView, fragment);
         fragmentTransaction.commit(); // save the changes
     }
 
     private void initvar(){
-        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
+       SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         String useremail = settings.getString(PREFS_USER, null);
-        CarListByOwnerViewModel.Factory factory = new CarListByOwnerViewModel.Factory(getApplication(), useremail);
-        viewModel = ViewModelProviders.of(this, factory).get(CarListByOwnerViewModel.class);
-        viewModel.getListByOwner().observe(this, carsWithUser -> {
-            if (carsWithUser != null) {
-                mCars = carsWithUser.cars;
-
-            }else{
-             //   mCars.add(new CarsWithUser("Erreur",null, null, null,null));
+       /*  UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), useremail);
+        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
+        viewModel.getUserWithCar().observe(this, carsWithUser -> {*/
+        repository.getAllCarByOwner(useremail, getApplication()).observe(CarsActivity.this, userEntity -> {
+            if (userEntity != null) {
+                mCars = userEntity.get(0).cars;
+                Fragment f = new CarFragment();
+                loadFragment(f);
+                getLayoutInflater().inflate(R.layout.activity_cars, frameLayout);
             }
+
         });
     }
 }

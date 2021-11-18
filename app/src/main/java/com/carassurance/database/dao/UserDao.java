@@ -21,9 +21,10 @@ public interface UserDao {
     @Query("SELECT * FROM users")
     LiveData<List<UserEntity>> getAll();
 
+
     @Transaction
     @Query("SELECT * FROM users WHERE email = :owner")
-    LiveData<CarsWithUser> getAllCarByOwner(String owner);
+    LiveData<List<CarsWithUser>> getAllCarByOwner(String owner);
 
     @Insert
     void insert(UserEntity user) throws SQLiteConstraintException;

@@ -8,12 +8,20 @@
         android:id="@+id/icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:src="@drawable/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/plate"
-        android:layout_width="fill_parent"
+        android:layout_width="108dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/edit_car"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:text="info"
         android:textColor="@color/black" />
 </LinearLayout>

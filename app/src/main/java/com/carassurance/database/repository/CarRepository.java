@@ -16,16 +16,16 @@ import java.util.List;
 public class CarRepository {
 
 
-        private static com.carassurance.database.repository.CarRepository instance;
+        private static CarRepository instance;
 
         private CarRepository() {
         }
 
-        public static com.carassurance.database.repository.CarRepository getInstance() {
+        public static CarRepository getInstance() {
             if (instance == null) {
-                synchronized (com.carassurance.database.repository.CarRepository.class) {
+                synchronized (CarRepository.class) {
                     if (instance == null) {
-                        instance = new com.carassurance.database.repository.CarRepository();
+                        instance = new CarRepository();
                     }
                 }
             }

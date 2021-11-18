@@ -46,7 +46,19 @@ public class DatabaseInitializer {
 
 
         addUser(db, "remi.cohu@gmail.com","Cohu","Rémi", hashPassword.hash("Soleil123"));
+        try {
+            // Let's ensure that the user are already stored in the database before we continue.
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         addCar(db,"FR339484", "Mazda", "dynamyx","Blanc", "remi.cohu@gmail.com" );
+        try {
+            // Let's ensure that the car are already stored in the database before we continue.
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         addIncident(db,"remi.cohu@gmail.com", 1,"Rte du centre 102, 1723 Marly","22.10.2021", "collision",false,null,"collision avec un mur");
         addIncident(db,"remi.cohu@gmail.com", 1,"Rte du centre 102, 1723 Marly","22.10.2021","vol", false,null,null);
 

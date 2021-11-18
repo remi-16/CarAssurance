@@ -2,6 +2,7 @@ package com.carassurance.ui.cars.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,10 +18,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.carassurance.BaseApp;
 import com.carassurance.R;
 import com.carassurance.database.entity.CarEntity;
+import com.carassurance.database.entity.IncidentEntity;
+import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.cars.CarsActivity;
+import com.carassurance.ui.incidents.EditIncidentActivity;
+import com.carassurance.ui.incidents.IncidentsActivity;
+import com.carassurance.ui.incidents.RecyclerAdapter;
 import com.carassurance.viewmodel.CarListByOwnerViewModel;
 import com.carassurance.viewmodel.CarListViewModel;
 
@@ -37,6 +45,8 @@ public class CarFragment extends Fragment {
     private Button mButtou;
     private ListView mListView;
     private CarListViewModel viewModel;
+    private UserRepository repository  ;
+    private CustomAdapter customAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -60,13 +70,6 @@ public class CarFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-   /*     viewModel = new ViewModelProvider((ViewModelStoreOwner) this).get(CarListViewModel.class);
-        viewModel.getListCarByOwner().observe((LifecycleOwner) this, cars -> {
-            if (cars != null) {
-                mCars = cars;
-
-            }
-        });*/
         initVar();
 
     }
@@ -80,18 +83,22 @@ public class CarFragment extends Fragment {
 
 
     public void initVar() {
-        String[] mCarsPlate = new String[1];
-        int[] mCarsImage = new int[/*cars.size()*/1];
-        mCarsPlate[0]="FR321372";
-        mCarsImage[0]=R.drawable.iconecar;
+
+
+        CarsActivity carsActivity = (CarsActivity)getActivity();
+        this.mCars = carsActivity.mCars;
+        String[] mCarsPlate = new String[mCars.size()];
+        int[] mCarsImage =  new int[mCars.size()];
         int i=0;
-       /*   for (CarEntity car: cars) {
+          for (CarEntity car: mCars) {
             mCarsPlate[i]=car.getPlate();
             mCarsImage[i]=R.drawable.iconecar;
             i=i+1;
-        }*/
-        CustomAdapter customAdapter = new CustomAdapter(getActivity().getApplicationContext(), mCarsPlate, mCarsImage);
+        }
+        customAdapter = new CustomAdapter(getActivity(), getActivity().getApplicationContext(), mCarsPlate, mCarsImage);
+
         mListView.setAdapter(customAdapter);
+
 
 
     }

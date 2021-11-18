@@ -28,7 +28,7 @@ public class CarListByOwnerViewModel extends AndroidViewModel {
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
 
-    private final MediatorLiveData<CarsWithUser> observableCarListWithUser;
+    private final MediatorLiveData<List<CarsWithUser>> observableCarListWithUser;
 
     private final MediatorLiveData<List<CarEntity>> observableCars;
 
@@ -52,8 +52,8 @@ public class CarListByOwnerViewModel extends AndroidViewModel {
         observableCars.setValue(null);
 
 
-        LiveData<CarsWithUser> user = userRepository.getAllCarByOwner(ownerId, application);
-        LiveData<List<CarEntity>> carlist = cRepository.getAllCarByOwner(ownerId, application);
+        LiveData<List<CarsWithUser>> user = userRepository.getAllCarByOwner(ownerId, application);
+        LiveData<List<CarEntity>> carlist = cRepository.getAllCar(application);
 
         observableCarListWithUser.addSource(user, observableCarListWithUser::setValue);
         observableCars.addSource(carlist, observableCars::setValue);
@@ -90,8 +90,10 @@ public class CarListByOwnerViewModel extends AndroidViewModel {
 
 
 
-
-    public LiveData<CarsWithUser> getListByOwner() {
+    public LiveData<List<CarEntity>> getOwnCar() {
+        return observableCars;
+    }
+    public LiveData<List<CarsWithUser>> getListByOwner() {
         return observableCarListWithUser;
     }
 

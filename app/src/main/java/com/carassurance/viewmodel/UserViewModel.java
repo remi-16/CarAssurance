@@ -12,8 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.carassurance.BaseApp;
 import com.carassurance.database.entity.UserEntity;
+import com.carassurance.database.pojo.CarsWithUser;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.util.OnAsyncEventListener;
+
+import java.util.List;
 
 
 public class UserViewModel extends AndroidViewModel {
@@ -24,6 +27,7 @@ public class UserViewModel extends AndroidViewModel {
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
     private final MediatorLiveData<UserEntity> observableUser;
+    private final MediatorLiveData<List<CarsWithUser>> observableUserWithCar;
 
     public UserViewModel(@NonNull Application application,
                            final String userId, UserRepository userRepository) {
@@ -34,13 +38,17 @@ public class UserViewModel extends AndroidViewModel {
         repository = userRepository;
 
         observableUser = new MediatorLiveData<>();
+        observableUserWithCar = new MediatorLiveData<>();
         // set by default null, until we get data from the database.
         observableUser.setValue(null);
+        observableUserWithCar.setValue(null);
 
         LiveData<UserEntity> user = repository.getUser(userId, application);
+        LiveData<List<CarsWithUser>> usercars = repository.getAllCarByOwner(userId, application);
 
         // observe the changes of the client entity from the database and forward them
         observableUser.addSource(user, observableUser::setValue);
+        observableUser.addSource(usercars, observableUserWithCar::setValue);
     }
 
     /**
@@ -73,6 +81,10 @@ public class UserViewModel extends AndroidViewModel {
      */
     public LiveData<UserEntity> getUser() {
         return observableUser;
+    }
+
+    public LiveData<List<CarsWithUser>> getUserWithCar() {
+        return observableUserWithCar;
     }
 
     public void createUser(UserEntity user, OnAsyncEventListener callback) {
