@@ -79,8 +79,11 @@ public class CarViewModel extends AndroidViewModel {
         return observableCar;
     }
 
+    public void updateCar(CarEntity car, OnAsyncEventListener callback) {
+        repository.update(car, callback, application);
+    }
 
-    public void createClient(CarEntity car, OnAsyncEventListener callback) {
+    public void deletCar(CarEntity car, OnAsyncEventListener callback) {
         repository.insert(car, callback, application);
     }
 

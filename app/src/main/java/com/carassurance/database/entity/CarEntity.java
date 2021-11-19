@@ -1,5 +1,7 @@
 package com.carassurance.database.entity;
 
+import android.text.Editable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;

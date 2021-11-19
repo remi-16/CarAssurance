@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import com.carassurance.database.AppDatabase;
 import com.carassurance.database.async.car.CreateCar;
+import com.carassurance.database.async.car.DeleteCar;
+import com.carassurance.database.async.car.UpdateCar;
 import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.pojo.CarsWithUser;
 import com.carassurance.util.OnAsyncEventListener;
@@ -46,6 +48,17 @@ public class CarRepository {
 
         public void insert(final CarEntity car, OnAsyncEventListener callback, Application application) {
             new CreateCar(application, callback).execute(car);
+        }
+
+
+        public void update(final CarEntity car, OnAsyncEventListener callback,
+                           Application application) {
+            new UpdateCar(application, callback).execute(car);
+        }
+
+        public void delete(final CarEntity car, OnAsyncEventListener callback,
+                           Application application) {
+            new DeleteCar(application, callback).execute(car);
         }
 
     }

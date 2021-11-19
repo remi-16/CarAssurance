@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.carassurance.R;
 import com.carassurance.ui.cars.CarsActivity;
+import com.carassurance.ui.cars.EditCarActivity;
 import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.viewmodel.CarListViewModel;
 
@@ -58,7 +59,7 @@ public class CustomAdapter extends BaseAdapter {
         btn .setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToCars();
+                goToCars(plate[i]);
             }
         });
         platetxt.setText(plate[i]);
@@ -66,8 +67,11 @@ public class CustomAdapter extends BaseAdapter {
         return view;
     }
 
-    public void goToCars(){
-        Intent i = new Intent(activity, ReportActivity. class );
+    public void goToCars(String plate){
+        Intent i = new Intent(activity, EditCarActivity. class );
+        String platecar = plate;
+        i.putExtra("plate",platecar);
+
         activity.startActivity(i);
     }
 }

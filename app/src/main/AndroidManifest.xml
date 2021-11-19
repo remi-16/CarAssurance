@@ -25,6 +25,7 @@
         <activity android:name=".ui.LoginActivity"></activity>
         <activity android:name=".ui.AppActivity"></activity>
         <activity android:name=".ui.cars.CarsActivity"></activity>
+        <activity android:name=".ui.cars.EditCarActivity"></activity>
         <activity android:name=".ui.report.ReportActivity"></activity>
         <activity android:name=".ui.incidents.IncidentsActivity"></activity>
     </application>
