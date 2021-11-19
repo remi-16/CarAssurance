@@ -1,6 +1,7 @@
 package com.carassurance.ui.cars;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +29,20 @@ public class EditCarActivity extends BaseActivity {
     private EditText txtColor;
     private Button btnEdit;
     private Button btnsave;
+    private Button btnadd;
+    private Button btndel;
+
+    public boolean isAddOrEdit() {
+        return AddOrEdit;
+    }
+
+    public void setAddOrEdit(boolean addOrEdit) {
+        AddOrEdit = addOrEdit;
+    }
+
     private CarViewModel viewModel;
     public CarEntity mCar;
+    public boolean AddOrEdit;
 
 
     @Override
@@ -44,59 +57,147 @@ public class EditCarActivity extends BaseActivity {
         txtBrand = findViewById(R.id.txt_brand);
         btnEdit = findViewById(R.id.btn_editcar);
         btnsave = findViewById(R.id.btn_savecar);
+        btnadd = findViewById(R.id.btn_addcar);
+        btndel = findViewById(R.id.btn_del);
+        btndel.setVisibility(View.INVISIBLE);
+        btnsave.setVisibility(View.INVISIBLE);
+        btnadd.setVisibility(View.INVISIBLE);
+        btnEdit.setVisibility(View.INVISIBLE);
+        Boolean type = getIntent().getBooleanExtra("value", true);
 
+        AddOrEdit = type;
+        if (AddOrEdit==true){
+            btndel.setVisibility(View.VISIBLE);
+            btnEdit.setVisibility(View.VISIBLE);
+            String plate = getIntent().getExtras().getString("plate");
 
-        String plate = getIntent().getExtras().getString("plate");
+            CarViewModel.Factory factory = new CarViewModel.Factory(getApplication(), plate);
+            viewModel = ViewModelProviders.of(this, factory).get(CarViewModel.class);
+            viewModel.getCar().observe(this, carEntity -> {
+                if (carEntity != null) {
+                    mCar = carEntity;
+                    txtplate.setText(mCar.getPlate());
+                    txtBrand.setText(mCar.getBrand());
+                    txtModele.setText(mCar.getModel());
+                    txtColor.setText(mCar.getColor());
+                    txtplate.setFocusable(false);
+                    txtColor.setFocusable(false);
+                    txtModele.setFocusable(false);
+                    txtBrand.setFocusable(false);
+                }
+            });
 
-        CarViewModel.Factory factory = new CarViewModel.Factory(getApplication(), plate);
-        viewModel = ViewModelProviders.of(this, factory).get(CarViewModel.class);
-        viewModel.getCar().observe(this, carEntity -> {
-            if (carEntity != null) {
-                mCar = carEntity;
-                txtplate.setText(mCar.getPlate());
-                txtBrand.setText(mCar.getBrand());
-                txtModele.setText(mCar.getModel());
-                txtColor.setText(mCar.getColor());
-                txtplate.setFocusable(false);
-                txtColor.setFocusable(false);
-                txtModele.setFocusable(false);
-                txtBrand.setFocusable(false);
-            }
-        });
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    txtplate.setFocusableInTouchMode(true);
+                    txtColor.setFocusableInTouchMode(true);
+                    txtModele.setFocusableInTouchMode(true);
+                    txtBrand.setFocusableInTouchMode(true);
+                    btnsave.setVisibility(View.VISIBLE);
+                    btndel.setVisibility(View.INVISIBLE);
+                    btnEdit.setVisibility(View.INVISIBLE);
+                }
+            });
+            btndel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewModel.deletCar(mCar, new OnAsyncEventListener() {
+                        @Override
+                        public void onSuccess() {
+                            goToApp();
+                        }
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtplate.setFocusableInTouchMode(true);
-                txtColor.setFocusableInTouchMode(true);
-                txtModele.setFocusableInTouchMode(true);
-                txtBrand.setFocusableInTouchMode(true);
-            }
-        });
-        btnsave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCar.setColor(String.valueOf(txtColor.getText().toString()));
-                mCar.setBrand(String.valueOf(txtBrand.getText().toString()));
-                mCar.setPlate(String.valueOf(txtplate.getText().toString()));
-                mCar.setModel(String.valueOf(txtModele.getText().toString()));
-                viewModel.updateCar(mCar, new OnAsyncEventListener() {
-                    @Override
-                    public void onSuccess() {
-                        goToApp();
+                        @Override
+                        public void onFailure(Exception e) {
+
+                        }
+                    });
+                }
+            });
+            btnsave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCar.setColor(txtColor.getText().toString());
+                    mCar.setBrand(txtBrand.getText().toString());
+                    mCar.setPlate(txtplate.getText().toString());
+                    mCar.setModel(txtModele.getText().toString());
+                    viewModel.updateCar(mCar, new OnAsyncEventListener() {
+                        @Override
+                        public void onSuccess() {
+                            goToApp();
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+
+                        }
+                    });
+                }
+
+            });
+        }
+        if(AddOrEdit==false){
+            btnadd.setVisibility(View.VISIBLE);
+            CarViewModel.Factory factory = new CarViewModel.Factory(getApplication(),"");
+            viewModel = ViewModelProviders.of(this, factory).get(CarViewModel.class);
+            btnadd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String color = txtColor.getText().toString();
+                    String brand = txtBrand.getText().toString();
+                    String plate = txtplate.getText().toString();
+                    String model = txtModele.getText().toString();
+                    if(color.isEmpty()){
+                        txtColor.setError("Coleur non conforme");
+                        txtColor.requestFocus();
                     }
-
-                    @Override
-                    public void onFailure(Exception e) {
-
+                    if(brand.isEmpty()){
+                        txtBrand.setError("marque non conforme");
+                        txtBrand.requestFocus();
                     }
-                });
-            }
+                    if(plate.isEmpty()){
+                        txtplate.setError("plaque non conforme");
+                        txtplate.requestFocus();
+                    }
+                    if(model.isEmpty()){
+                        txtModele.setError("model non conforme");
+                        txtModele.requestFocus();
+                    }
+                    if (!color.isEmpty() && !brand.isEmpty() && !plate.isEmpty() && !model.isEmpty()){
+                        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
+                        String useremail = settings.getString(PREFS_USER, null);
+                        CarEntity c = new CarEntity();
+                        c.setColor(color);
+                        c.setBrand(brand);
+                        c.setPlate(plate);
+                        c.setModel(model);
+                        c.setOwner(useremail);
 
-        });
+                        viewModel.insertCar(c, new OnAsyncEventListener() {
+
+                            @Override
+                            public void onSuccess() {
+                                goToCar();
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
     public void goToApp(){
         Intent i = new Intent( this , AppActivity. class );
+        startActivity(i);
+    }
+
+    public void goToCar(){
+        Intent i = new Intent( this , CarsActivity. class );
         startActivity(i);
     }
 }

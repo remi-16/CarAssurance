@@ -63,6 +63,10 @@ public class CarEntity {
         this.id = id;
     }
 
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     public String getOwner() {
         return owner;
     }

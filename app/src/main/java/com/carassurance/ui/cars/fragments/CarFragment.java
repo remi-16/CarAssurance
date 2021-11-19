@@ -26,6 +26,7 @@ import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.cars.CarsActivity;
+import com.carassurance.ui.cars.EditCarActivity;
 import com.carassurance.ui.incidents.EditIncidentActivity;
 import com.carassurance.ui.incidents.IncidentsActivity;
 import com.carassurance.ui.incidents.RecyclerAdapter;
@@ -54,6 +55,15 @@ public class CarFragment extends Fragment {
         //      viewModel = new ViewModelProvider((ViewModelStoreOwner) getActivity()).get(CarListByOwnerViewModel.class);
         view= inflater.inflate(R.layout.fragment_car, container, false);
         mButtou= (Button) view.findViewById(R.id.buttonAddCar);
+        mButtou .setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), EditCarActivity. class );
+                i.putExtra("value",false);
+
+                getActivity().startActivity(i);
+            }
+        });
         // Bundle bundle = this.getArguments();
         // cars = (ArrayList<CarEntity>) bundle.getSerializable("cars");
         mListView = (ListView) view.findViewById(R.id.carsListView);
@@ -77,6 +87,11 @@ public class CarFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    public void goToEditCar(){
+        Intent i = new Intent( getActivity() , EditCarActivity. class );
+        startActivity(i);
     }
 
 

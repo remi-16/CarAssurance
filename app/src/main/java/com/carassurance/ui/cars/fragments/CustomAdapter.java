@@ -68,9 +68,11 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     public void goToCars(String plate){
+
         Intent i = new Intent(activity, EditCarActivity. class );
         String platecar = plate;
         i.putExtra("plate",platecar);
+        i.putExtra("value",true);
 
         activity.startActivity(i);
     }
