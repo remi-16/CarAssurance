@@ -40,9 +40,9 @@ public class AppActivity extends BaseActivity{
         report = findViewById(R.id.buttonReport);
         incidents = findViewById(R.id.buttonIncidents);
         cars = findViewById(R.id.buttonCars);
-        lastname = findViewById(R.id.lastname);
-        firstname = findViewById(R.id.firstname);
-        email = findViewById(R.id.email);
+        lastname = findViewById(R.id.inc_numb);
+        firstname = findViewById(R.id.stat);
+        email = findViewById(R.id.emailclient);
 
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         String useremail = settings.getString(PREFS_USER, null);

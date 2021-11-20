@@ -94,11 +94,7 @@ public class CarFragment extends Fragment {
         startActivity(i);
     }
 
-
-
-
     public void initVar() {
-
 
         CarsActivity carsActivity = (CarsActivity)getActivity();
         this.mCars = carsActivity.mCars;

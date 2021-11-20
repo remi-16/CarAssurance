@@ -71,11 +71,11 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         String car = null;
         String status = null;
 
-        if (item.getClass().equals(IncidentEntity.class)){
-            id = String.valueOf(((IncidentEntity) item).getId());
-            date = ((IncidentEntity) item).getDate();
-            car = ((IncidentEntity) item).getCar_id()+"";
-            status = ((IncidentEntity) item).getStatus();
+        if (item.getClass().equals(IncidentWithCar.class)){
+            id = String.valueOf(((IncidentWithCar) item).incidents.getId());
+            date = ((IncidentWithCar) item).incidents.getDate();
+            car = ((IncidentWithCar) item).car.getPlate()+"";
+            status = ((IncidentWithCar) item).incidents.getStatus();
             if (status.equalsIgnoreCase("Ouvert")){
                 holder.view.setBackgroundColor(0xff00ff00);
             }

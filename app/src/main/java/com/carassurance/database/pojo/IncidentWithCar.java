@@ -13,7 +13,7 @@ public class IncidentWithCar {
     @Embedded
     public IncidentEntity incidents ;
 
-    @Relation(parentColumn = "id", entityColumn = "car_id", entity = CarEntity.class)
+    @Relation(parentColumn = "car_id", entityColumn = "id", entity = CarEntity.class)
     public CarEntity car;
 
 

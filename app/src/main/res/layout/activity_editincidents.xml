@@ -1,6 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="382dp"
+        android:layout_height="294dp"
+        android:layout_gravity="center"
+        android:background="@drawable/borderlayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.229">
+
+        <TextView
+            android:id="@+id/txtfixnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:text="Incident N°:"
+            android:textColor="#0B0B0B"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+
+        <TextView
+            android:id="@+id/txtfixstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Status:"
+            android:textColor="#0B0B0B"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.248" />
+
+        <TextView
+            android:id="@+id/txtfixclient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Client:"
+            android:textColor="#0B0B0B"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.379" />
+
+        <TextView
+            android:id="@+id/txtfixdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Date:"
+            android:textColor="#0B0B0B"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtfixplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Lieu:"
+            android:textColor="#0B0B0B"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.642" />
+
+        <TextView
+            android:id="@+id/txtfixplate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Voiture:"
+            android:textColor="#0B0B0B"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.919" />
+
+        <TextView
+            android:id="@+id/inc_numb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toEndOf="@+id/txtfixnumber"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/stat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toEndOf="@+id/txtfixstatus"
+            app:layout_constraintTop_toBottomOf="@+id/inc_numb"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/emailclient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/txtfixclient"
+            app:layout_constraintTop_toBottomOf="@+id/stat"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="88dp"
+            app:layout_constraintStart_toEndOf="@+id/txtfixclient"
+            app:layout_constraintTop_toBottomOf="@+id/stat"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="124dp"
+            app:layout_constraintStart_toEndOf="@+id/txtfixclient"
+            app:layout_constraintTop_toBottomOf="@+id/stat"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/incplate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="164dp"
+            app:layout_constraintStart_toEndOf="@+id/txtfixclient"
+            app:layout_constraintTop_toBottomOf="@+id/stat"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="52dp"
+            app:layout_constraintStart_toEndOf="@+id/txtfixclient"
+            app:layout_constraintTop_toBottomOf="@+id/stat"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/txtfixtype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Type:"
+            android:textColor="#0B0B0B"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.773" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/txtdescfix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="412dp"
+        android:text="Description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="382dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="436dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkBoxInjured"
+        android:layout_width="287dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="108dp"
+        android:text="Y a t'il des bléssés?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/description"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_incsave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="32dp"
+        android:text="Enregistrer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxInjured"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_incdel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="28dp"
+        android:text="Supprimer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxInjured"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_incedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
+        android:text="Modifier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxInjured"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
