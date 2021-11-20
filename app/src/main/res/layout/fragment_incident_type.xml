@@ -13,8 +13,29 @@
         android:text="@string/report_type"
         android:textSize="12sp"/>
 
-    <ListView
+    <Button
+        android:id="@+id/incidentTypeBtn1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:text="Accident" />
+
+    <Button
+        android:id="@+id/incidentTypeBtn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bris de glace" />
+
+    <Button
+        android:id="@+id/incidentTypeBtn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dégât parking" />
+
+    <Button
+        android:id="@+id/incidentTypeBtn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dégat fouine" />
+
 
 </LinearLayout>

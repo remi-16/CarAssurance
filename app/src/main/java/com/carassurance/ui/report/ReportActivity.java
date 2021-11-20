@@ -1,21 +1,17 @@
 package com.carassurance.ui.report;
 
-import static com.carassurance.R.color.red;
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.fragment.app.Fragment;
+import android.widget.Toast;
 
 import com.carassurance.R;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.report.fragments.IncidentTypeFragment;
 
-import java.util.List;
 
-
-public class ReportActivity extends BaseActivity {
+public class ReportActivity extends BaseActivity implements IncidentTypeFragment.OnButtonClickedListener {
 
     private Button mCancelButton;
     private Button mNextButton;
@@ -45,7 +41,12 @@ public class ReportActivity extends BaseActivity {
         mNextButton = findViewById(R.id.buttonNext);
         mBackButton = findViewById(R.id.buttonBack);
 
+    }
 
+    @Override
+    public void onButtonClicked(View view, int selected) {
+
+        Log.d("D", String.valueOf(selected));
 
     }
 }
