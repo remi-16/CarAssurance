@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_cars.xml" value="0.20520833333333333" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_incidents.xml" value="0.24739583333333334" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_report.xml" value="0.25" />
+        <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/fragment_car.xml" value="0.17844202898550723" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/fragment_incident_type.xml" value="0.17147922998986828" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/menu/setting_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/xml/preferences.xml" value="0.2957427536231884" />

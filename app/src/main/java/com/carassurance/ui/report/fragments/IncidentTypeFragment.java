@@ -3,15 +3,22 @@ package com.carassurance.ui.report.fragments;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.carassurance.R;
+import com.carassurance.ui.cars.CarsActivity;
+import com.carassurance.ui.report.ReportActivity;
+
+import java.util.ArrayList;
 
 
 public class IncidentTypeFragment extends Fragment implements View.OnClickListener {
@@ -20,13 +27,19 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
     private Button mButton2;
     private Button mButton3;
     private Button mButton4;
+    private RadioGroup mRadioGroup;
+    private RadioButton mRadioButton1;
+    private RadioButton mRadioButton2;
+    private RadioButton mRadioButton3;
+    private RadioButton mRadioButton4;
+    private String[] mIncidentTypes;
 
     //2 - Declare callback
     private OnButtonClickedListener mCallback;
 
     // 1 - Declare our interface that will be implemented by any container activity
     public interface OnButtonClickedListener {
-        public void onButtonClicked(View view, int selected);
+        void onButtonClicked(View view, int selected);
     }
 
     // 3 - Create callback to parent activity
@@ -64,8 +77,16 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
         // Inflate the layout for this fragment
         View result = inflater.inflate(R.layout.fragment_incident_type, container, false);
 
+        ReportActivity reportActivity = (ReportActivity) getActivity();
+        this.mIncidentTypes = reportActivity.mIncidentTypes;
+
+        initButtons(result);
 
 
+        return result;
+    }
+
+    private void initButtons(View result) {
         mButton1 = result.findViewById(R.id.incidentTypeBtn1);
         mButton2 = result.findViewById(R.id.incidentTypeBtn2);
         mButton3 = result.findViewById(R.id.incidentTypeBtn3);
@@ -76,7 +97,28 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
         mButton3.setOnClickListener(this);
         mButton4.setOnClickListener(this);
 
-        return result;
+        mButton1.setText(mIncidentTypes[0]);
+        mButton2.setText(mIncidentTypes[1]);
+        mButton3.setText(mIncidentTypes[2]);
+        mButton4.setText(mIncidentTypes[3]);
+
+        mRadioGroup = result.findViewById(R.id.incidentTypeRadioGroup);
+        mRadioButton1 = result.findViewById(R.id.incidentTypeRB1);
+        mRadioButton2 = result.findViewById(R.id.incidentTypeRB2);
+        mRadioButton3 = result.findViewById(R.id.incidentTypeRB3);
+        mRadioButton4 = result.findViewById(R.id.incidentTypeRB4);
+
+        mRadioButton1.setText(mIncidentTypes[0]);
+        mRadioButton2.setText(mIncidentTypes[1]);
+        mRadioButton3.setText(mIncidentTypes[2]);
+        mRadioButton4.setText(mIncidentTypes[3]);
+
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                Log.println(Log.INFO,"test","test : " + Integer.toString(i));
+            }
+        });
     }
 
     @Override
