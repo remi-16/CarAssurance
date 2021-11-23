@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.carassurance.BaseApp;
+import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.entity.UserEntity;
 import com.carassurance.database.repository.IncidentRepository;
@@ -52,11 +53,11 @@ public class IncidentViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final long id;
+        private final Long id;
 
         private final IncidentRepository repository;
 
-        public Factory(@NonNull Application application, long id) {
+        public Factory(@NonNull Application application, Long id) {
             this.application = application;
             this.id = id;
             repository = ((BaseApp) application).getIncidentRepository();
@@ -76,8 +77,17 @@ public class IncidentViewModel extends AndroidViewModel {
         return observableIncident;
     }
 
-    public void createIncident(IncidentEntity incident, OnAsyncEventListener callback) {
+    public void create(IncidentEntity incident, OnAsyncEventListener callback) {
         repository.insert(incident, callback, application);
+    }
+
+    public void update(IncidentEntity incident, OnAsyncEventListener callback) {
+        repository.update(incident, callback, application);
+    }
+
+
+    public void delete(IncidentEntity incident, OnAsyncEventListener callback) {
+        repository.delete(incident, callback, application);
     }
 
 }

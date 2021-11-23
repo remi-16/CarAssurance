@@ -59,6 +59,7 @@ public class CustomAdapter extends BaseAdapter {
         btn .setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 goToCars(plate[i]);
             }
         });

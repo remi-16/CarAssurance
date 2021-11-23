@@ -24,6 +24,10 @@ public interface IncidentDao {
     //@Transaction
     @Query("SELECT * FROM incidents WHERE client = :emailClient")
     LiveData<List<IncidentEntity>> getAllIncidentsByClient(String emailClient);
+    
+    @Transaction
+    @Query("SELECT * FROM incidents WHERE client = :emailClient")
+    LiveData<List<IncidentWithCar>> getAllIncidentsWithCarByClient(String emailClient);
 
     @Query("SELECT * FROM incidents WHERE id = :id")
     LiveData<IncidentEntity> getById(Long id);
