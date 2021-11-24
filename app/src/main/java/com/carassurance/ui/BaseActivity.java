@@ -16,9 +16,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import com.carassurance.R;
+import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.entity.UserEntity;
 import com.carassurance.encryption.HashPassword;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public abstract class BaseActivity  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     /**
@@ -37,6 +40,7 @@ public abstract class BaseActivity  extends AppCompatActivity implements Navigat
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
+    public List<CarEntity> mCars;
 
 
     @Override

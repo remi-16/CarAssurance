@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/carfragmentContainerView"
         android:name="com.carassurance.ui.cars.fragments.CarFragment"
         android:layout_width="411dp"

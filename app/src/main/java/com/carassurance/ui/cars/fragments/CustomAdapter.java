@@ -59,7 +59,7 @@ public class CustomAdapter extends BaseAdapter {
         btn .setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(activity.getLocalClassName().equals("ui.cars.CarsActivity"))
                 goToCars(plate[i]);
             }
         });

@@ -1,7 +1,7 @@
 package com.carassurance.ui.cars.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -25,6 +26,7 @@ import com.carassurance.R;
 import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.repository.UserRepository;
+import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.ui.cars.EditCarActivity;
 import com.carassurance.ui.incidents.EditIncidentActivity;
@@ -96,7 +98,7 @@ public class CarFragment extends Fragment {
 
     public void initVar() {
 
-        CarsActivity carsActivity = (CarsActivity)getActivity();
+        BaseActivity carsActivity = (BaseActivity) getActivity();
         this.mCars = carsActivity.mCars;
         String[] mCarsPlate = new String[mCars.size()];
         int[] mCarsImage =  new int[mCars.size()];

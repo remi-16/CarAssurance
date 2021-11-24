@@ -21,6 +21,7 @@ import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.LoginActivity;
 import com.carassurance.ui.cars.fragments.CarFragment;
+import com.carassurance.ui.report.fragments.ReportIncidentTypeFragment;
 import com.carassurance.viewmodel.CarListByOwnerViewModel;
 import com.carassurance.viewmodel.IncidentListByOwnerViewModel;
 import com.carassurance.viewmodel.UserViewModel;
@@ -32,7 +33,7 @@ public class CarsActivity extends BaseActivity {
 
     private TextView textCar;
     private UserViewModel viewModel;
-    public List<CarEntity> mCars;
+    //public List<CarEntity> mCars;
     private UserRepository repository  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class CarsActivity extends BaseActivity {
 
     }
 
-    private void loadFragment(Fragment fragment) {
+    /*private void loadFragment(Fragment fragment) {
         // create a FragmentManager
         FragmentManager fm = getFragmentManager();
 
@@ -55,7 +56,7 @@ public class CarsActivity extends BaseActivity {
 
         fragmentTransaction.replace(R.id.carfragmentContainerView, fragment);
         fragmentTransaction.commit(); // save the changes
-    }
+    }*/
 
     private void initvar(){
        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
@@ -66,8 +67,13 @@ public class CarsActivity extends BaseActivity {
         repository.getAllCarByOwner(useremail, getApplication()).observe(CarsActivity.this, userEntity -> {
             if (userEntity != null) {
                 mCars = userEntity.get(0).cars;
-                Fragment f = new CarFragment();
-                loadFragment(f);
+                //Fragment f = new CarFragment();
+                //loadFragment(f);
+                getSupportFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .add(R.id.carfragmentContainerView, CarFragment.class, null)
+                        .commit();
+
                 getLayoutInflater().inflate(R.layout.activity_cars, frameLayout);
             }
 

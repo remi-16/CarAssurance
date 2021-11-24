@@ -7,17 +7,24 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.carassurance.BaseApp;
 import com.carassurance.R;
+import com.carassurance.database.entity.IncidentEntity;
+import com.carassurance.database.repository.IncidentRepository;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.report.fragments.ReportIncidentTypeFragment;
 import com.carassurance.ui.report.fragments.ReportDescriptionFragment;
+import com.carassurance.util.OnAsyncEventListener;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 
 public class ReportActivity extends BaseActivity implements View.OnClickListener {
 
     private ReportVM viewModel;
 
-    private Fragment testFragment;
+    private IncidentRepository repository;
 
     private Button mCancelButton;
     private Button mNextButton;
@@ -35,6 +42,7 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
 
         });
 
+        repository= ((BaseApp) getApplication()).getIncidentRepository();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -60,6 +68,20 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
 
     }
 
+   /* private void insertIncident(){
+        IncidentEntity incidentEntity = new IncidentEntity("test",(long)1,"test", "24.11.2021",viewModel.getType(),false,"",viewModel.getDescription());
+        repository.insert(incidentEntity, new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        },);
+    }*/
 
 /*
     @Override
@@ -73,14 +95,12 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if (view == mNextButton) {
-
             if(viewModel.getCheckNext() == true){
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
                             .addToBackStack("Test")
                             .replace(R.id.fragment_container_view, ReportDescriptionFragment.class, null)
                             .commit();
-
             }
         } else if (view == mBackButton) {
             getSupportFragmentManager().popBackStack();
