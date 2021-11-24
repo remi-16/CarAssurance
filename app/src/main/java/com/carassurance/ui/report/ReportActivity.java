@@ -1,30 +1,24 @@
 package com.carassurance.ui.report;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.carassurance.R;
 import com.carassurance.ui.BaseActivity;
-import com.carassurance.ui.cars.fragments.CarFragment;
-import com.carassurance.ui.report.fragments.IncidentTypeFragment;
+import com.carassurance.ui.report.fragments.ReportIncidentTypeFragment;
+import com.carassurance.ui.report.fragments.ReportDescriptionFragment;
 
 
-public class ReportActivity extends BaseActivity implements IncidentTypeFragment.OnButtonClickedListener, View.OnClickListener {
+public class ReportActivity extends BaseActivity implements View.OnClickListener {
 
     private ReportVM viewModel;
 
+    private Fragment testFragment;
 
-    private IncidentTypeFragment mIncidentTypeFragment;
-    private CarFragment mCarFragment;
     private Button mCancelButton;
     private Button mNextButton;
     private Button mBackButton;
@@ -45,7 +39,7 @@ public class ReportActivity extends BaseActivity implements IncidentTypeFragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_view, IncidentTypeFragment.class, null)
+                    .add(R.id.fragment_container_view, ReportIncidentTypeFragment.class, null)
                     .commit();
         }
 
@@ -62,26 +56,34 @@ public class ReportActivity extends BaseActivity implements IncidentTypeFragment
         mNextButton.setOnClickListener(this);
         mBackButton.setOnClickListener(this);
 
+
+
     }
 
 
-
+/*
     @Override
     public void onButtonClicked(View view, int selected) {
 
         mReportType = mIncidentTypes[selected];
 
     }
+*/
 
     @Override
     public void onClick(View view) {
         if (view == mNextButton) {
-            //mNextButton.setText(viewModel.getType());
+
             if(viewModel.getCheckNext() == true){
-                mNextButton.setText("test");
+                    getSupportFragmentManager().beginTransaction()
+                            .setReorderingAllowed(true)
+                            .addToBackStack("Test")
+                            .replace(R.id.fragment_container_view, ReportDescriptionFragment.class, null)
+                            .commit();
+
             }
         } else if (view == mBackButton) {
-
+            getSupportFragmentManager().popBackStack();
         } else if (view == mCancelButton) {
 
         }

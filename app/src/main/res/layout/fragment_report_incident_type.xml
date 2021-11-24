@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.report.fragments.IncidentTypeFragment">
+    tools:context=".ui.report.fragments.ReportIncidentTypeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/report_type"
-        android:textSize="12sp"/>
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <Button
+    <!--Button
         android:id="@+id/incidentTypeBtn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +36,7 @@
         android:id="@+id/incidentTypeBtn4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"/>
+        android:text="Button"/-->
 
     <RadioGroup
         android:id="@+id/incidentTypeRadioGroup"

@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
-        android:name="com.carassurance.ui.report.fragments.IncidentTypeFragment"
+        android:name="com.carassurance.ui.report.fragments.ReportIncidentTypeFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:layout_constraintVertical_bias="0.268"
-        tools:layout="@layout/fragment_incident_type" />
+        tools:layout="@layout/fragment_report_incident_type" />
 
     <View
         android:id="@+id/divider"

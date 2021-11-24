@@ -1,35 +1,29 @@
 package com.carassurance.ui.report.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.carassurance.R;
-import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.ui.report.ReportVM;
 
-import java.util.ArrayList;
 
-
-public class IncidentTypeFragment extends Fragment implements View.OnClickListener {
+public class ReportIncidentTypeFragment extends Fragment implements View.OnClickListener {
 
     private ReportVM viewModel;
-    private Button mButton1;
+/*    private Button mButton1;
     private Button mButton2;
     private Button mButton3;
-    private Button mButton4;
+    private Button mButton4;*/
     private RadioGroup mRadioGroup;
     private RadioButton mRadioButton1;
     private RadioButton mRadioButton2;
@@ -37,6 +31,7 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
     private RadioButton mRadioButton4;
     private String[] mIncidentTypes;
 
+    /*
     //2 - Declare callback
     private OnButtonClickedListener mCallback;
 
@@ -55,6 +50,8 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
         }
     }
 
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -62,8 +59,9 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
         // 4 - Call the method that creating callback after being attached to parent activity
         this.createCallbackToParentActivity();
     }
+    */
 
-    public IncidentTypeFragment() {
+    public ReportIncidentTypeFragment() {
         // Required empty public constructor
     }
 
@@ -78,7 +76,7 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View result = inflater.inflate(R.layout.fragment_incident_type, container, false);
+        View result = inflater.inflate(R.layout.fragment_report_incident_type, container, false);
 
         viewModel = new ViewModelProvider(requireActivity()).get(ReportVM.class);
 
@@ -92,7 +90,7 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
     }
 
     private void initButtons(View result) {
-        mButton1 = result.findViewById(R.id.incidentTypeBtn1);
+/*      mButton1 = result.findViewById(R.id.incidentTypeBtn1);
         mButton2 = result.findViewById(R.id.incidentTypeBtn2);
         mButton3 = result.findViewById(R.id.incidentTypeBtn3);
         mButton4 = result.findViewById(R.id.incidentTypeBtn4);
@@ -106,7 +104,7 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
         mButton2.setText(mIncidentTypes[1]);
         mButton3.setText(mIncidentTypes[2]);
         mButton4.setText(mIncidentTypes[3]);
-
+*/
         mRadioGroup = result.findViewById(R.id.incidentTypeRadioGroup);
         mRadioButton1 = result.findViewById(R.id.incidentTypeRB1);
         mRadioButton2 = result.findViewById(R.id.incidentTypeRB2);
@@ -149,7 +147,7 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        int selected = -1;
+        /*int selected = -1;
 
 
         if (v == mButton1) {
@@ -169,6 +167,6 @@ public class IncidentTypeFragment extends Fragment implements View.OnClickListen
         }
 
         // 5 - Spread the click to the parent activity
-        mCallback.onButtonClicked(v,selected);
+        mCallback.onButtonClicked(v,selected);*/
     }
 }
