@@ -46,25 +46,25 @@
             android:id="@+id/incidentTypeRB1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="RadioButton"/>
 
         <RadioButton
             android:id="@+id/incidentTypeRB2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="RadioButton"/>
 
         <RadioButton
             android:id="@+id/incidentTypeRB3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="RadioButton"/>
 
         <RadioButton
             android:id="@+id/incidentTypeRB4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="RadioButton"/>
     </RadioGroup>
 
 

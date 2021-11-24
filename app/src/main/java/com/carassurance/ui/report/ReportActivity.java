@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.carassurance.R;
 import com.carassurance.ui.BaseActivity;
@@ -18,6 +19,9 @@ import com.carassurance.ui.report.fragments.IncidentTypeFragment;
 
 
 public class ReportActivity extends BaseActivity implements IncidentTypeFragment.OnButtonClickedListener, View.OnClickListener {
+
+    private ReportVM viewModel;
+
 
     private IncidentTypeFragment mIncidentTypeFragment;
     private CarFragment mCarFragment;
@@ -30,6 +34,12 @@ public class ReportActivity extends BaseActivity implements IncidentTypeFragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        viewModel = new ViewModelProvider(this).get(ReportVM.class);
+        viewModel.getSelectedItem().observe(this, item -> {
+            // Perform an action with the latest item data
+
+        });
 
 
         if (savedInstanceState == null) {
@@ -66,7 +76,10 @@ public class ReportActivity extends BaseActivity implements IncidentTypeFragment
     @Override
     public void onClick(View view) {
         if (view == mNextButton) {
-            //loadFragment(mCarFragment);
+            //mNextButton.setText(viewModel.getType());
+            if(viewModel.getCheckNext() == true){
+                mNextButton.setText("test");
+            }
         } else if (view == mBackButton) {
 
         } else if (view == mCancelButton) {
