@@ -74,13 +74,6 @@ public class UserEntity {
         this.password = password;
     }
 
-   /* public ArrayList<CarEntity> getCars() {
-        return cars;
-    }
-
-    public void setCars(ArrayList<CarEntity> cars) {
-        this.cars = cars;
-    }*/
 
     @Override
     public boolean equals (Object object) {

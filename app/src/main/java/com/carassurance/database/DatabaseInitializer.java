@@ -36,6 +36,9 @@ public class DatabaseInitializer {
         IncidentEntity incident = new IncidentEntity(client, car_id, location, date, type, injured,urlMoreInfo,desciption);
         db.incidentDao().insert(incident);
     }
+    private static void addIncident2(final AppDatabase db,   IncidentEntity ie){
+        db.incidentDao().insert(ie);
+    }
 
     private static void populateWithTestData(AppDatabase db) {
         HashPassword hashPassword = new HashPassword();
@@ -61,7 +64,9 @@ public class DatabaseInitializer {
         }
         addIncident(db,"remi.cohu@gmail.com", 1,"Rte du centre 102, 1723 Marly","22.10.2021", "collision",false,null,"collision avec un mur");
         addIncident(db,"remi.cohu@gmail.com", 1,"Rte du centre 102, 1723 Marly","22.10.2021","vol", false,null,null);
-
+        IncidentEntity ie = new IncidentEntity("remi.cohu@gmail.com", 1L,"Rte du centre 102, 1723 Marly","01.10.2021","vol", false,null,null);
+        ie.setStatus("Fermer");
+        addIncident2(db,ie);
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {

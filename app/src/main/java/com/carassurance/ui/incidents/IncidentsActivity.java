@@ -1,6 +1,5 @@
 package com.carassurance.ui.incidents;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,24 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.carassurance.BaseApp;
 import com.carassurance.R;
-import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.pojo.IncidentWithCar;
 import com.carassurance.database.repository.IncidentRepository;
-import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.BaseActivity;
-import com.carassurance.ui.cars.CarsActivity;
-import com.carassurance.ui.cars.fragments.CarFragment;
-import com.carassurance.viewmodel.IncidentListByOwnerViewModel;
 
+/**
+ * Class principale de l'interface ou l'utilisateur peut voir ses incidents
+ */
 public class IncidentsActivity extends BaseActivity {
 
     private TextView textView;
     private List<IncidentWithCar> mIncidents;
-    private IncidentListByOwnerViewModel viewModel;
     private RecyclerAdapter<IncidentWithCar> adapter;
     private RecyclerView recyclerView;
     private IncidentRepository repository;
@@ -49,8 +44,6 @@ public class IncidentsActivity extends BaseActivity {
         // use a linear layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-
 
 
         mIncidents = new ArrayList<>();
@@ -77,18 +70,13 @@ public class IncidentsActivity extends BaseActivity {
         return false;
     }
 
+    /**
+     * Initialise le viewModel et transmet chaque incident de l'utilisateur dans une recycleView
+     */
     private void setupViewModels() {
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         String useremail = settings.getString(PREFS_USER, null);
-     /*   IncidentListByOwnerViewModel.Factory factory = new IncidentListByOwnerViewModel.Factory(getApplication(), useremail);
-        viewModel = ViewModelProviders.of(this, factory).get(IncidentListByOwnerViewModel.class);
-        viewModel.getListByOwner().observe(this, incidents -> {
-            if (incidents != null) {
-                mIncidents = incidents;
-                adapter.setData(mIncidents);
-                recyclerView.setAdapter(adapter);
-            }
-        });*/
+
         repository= ((BaseApp) getApplication()).getIncidentRepository();
 
         repository.getAllIncidentWithCar(useremail, getApplication()).observe(IncidentsActivity.this, incident -> {

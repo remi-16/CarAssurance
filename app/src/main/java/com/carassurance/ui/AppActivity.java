@@ -17,6 +17,9 @@ import com.carassurance.ui.incidents.IncidentsActivity;
 import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.viewmodel.UserViewModel;
 
+/**
+ * Class AppActivity est l'activité principale de notre application
+ */
 public class AppActivity extends BaseActivity{
     private Button report;
     private Button incidents;
@@ -27,7 +30,6 @@ public class AppActivity extends BaseActivity{
     private UserViewModel viewModel;
 
     private UserEntity user;
-
 
 
     @Override
@@ -79,14 +81,25 @@ public class AppActivity extends BaseActivity{
 
     }
 
+    /**
+     * goToReport ouvre l'activity qui permet de déclarer un sinistre
+     */
     public void goToReport(){
         Intent i = new Intent( this , ReportActivity. class );
         startActivity(i);
     }
+
+    /**
+     * goToCars ouvre l'activity qui permet de voir ses voitures
+     */
     public void goToCars(){
         Intent i = new Intent( this , CarsActivity. class );
         startActivity(i);
     }
+
+    /**
+     * goToIncidents ouvre l'activity qui permet de voir ses incidents
+     */
     public void goToIncidents(){
         Intent i = new Intent( this , IncidentsActivity. class );
         startActivity(i);

@@ -22,6 +22,9 @@ import com.carassurance.viewmodel.UserViewModel;
 
 import java.util.List;
 
+/**
+ * Cette Class permet afficher les details d'une voiture. Elle permet également de modifier, supprimer et ajouté un véhicule
+ */
 public class EditCarActivity extends BaseActivity {
     private EditText txtplate;
     private EditText txtBrand;
@@ -191,11 +194,19 @@ public class EditCarActivity extends BaseActivity {
             });
         }
     }
+
+    /**
+     * retourne vers l'activity principale
+     */
     public void goToApp(){
         Intent i = new Intent( this , AppActivity. class );
         startActivity(i);
     }
 
+
+    /**
+     * retourne vers l'activity des voitures
+     */
     public void goToCar(){
         Intent i = new Intent( this , CarsActivity. class );
         startActivity(i);

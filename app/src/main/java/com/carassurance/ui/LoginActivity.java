@@ -13,13 +13,13 @@ import android.widget.EditText;
 import com.carassurance.BaseApp;
 import com.carassurance.R;
 
-import com.carassurance.database.entity.UserEntity;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.encryption.HashPassword;
-import com.carassurance.viewmodel.UserViewModel;
 
 
-
+/**
+ * Class LoginActivity est l'interface graphique du login
+ */
 public class LoginActivity extends BaseActivity{
 
     private EditText username;
@@ -40,16 +40,8 @@ public class LoginActivity extends BaseActivity{
         username = findViewById(R.id.edit_username);
         password = findViewById(R.id.edit_password);
         login = findViewById(R.id.buttonLogin);
-        stayConnect = findViewById(R.id.stayConnected);
         repository = ((BaseApp) getApplication()).getUserRepository();
 
-
-      //  sp = getSharedPreferences( "login" , MODE_PRIVATE );
-
-       /* if (sp.getBoolean("login")){
-            staylogged =2;
-            goToApp();
-        }*/
 
         login .setOnClickListener( new View.OnClickListener() {
             @Override
@@ -62,6 +54,10 @@ public class LoginActivity extends BaseActivity{
 
     }
 
+    /**
+     * cette methode vérifie si l'utilisateur existe et connect l'utilisateur s'il existe
+     * @param email
+     */
     public void initialUser(String email){
         HashPassword hashPassword = new HashPassword();
 
@@ -96,6 +92,9 @@ public class LoginActivity extends BaseActivity{
 
     }
 
+    /**
+     * cette methode redirige sur app activity
+     */
     public void goToApp(){
         Intent i = new Intent( this , AppActivity. class );
         startActivity(i);

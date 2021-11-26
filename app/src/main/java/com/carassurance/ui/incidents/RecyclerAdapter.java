@@ -18,13 +18,19 @@ import com.carassurance.util.RecyclerViewItemClickListener;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Cette class reçoit u  incident et va créé un interface graphique pour chaque incident
+ * @param <T>
+ */
 public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
     private List<T> mData;
     private RecyclerViewItemClickListener mListener;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
+    /**
+     *   Fournir une référence aux vues pour chaque élément de données.
+     *   Les éléments de données complexes peuvent nécessiter plus d'une vue par élément, et
+     *   donne accès à toutes les vues d'un élément de données dans un porte-vue
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         TextView idIncident;
@@ -43,10 +49,12 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
 
         }
 
-
-
     }
 
+    /**
+     * grace à l'interface RecyclerViewItemClickListener, rend la vue de l'incident clicable
+     * @param listener
+     */
     public RecyclerAdapter(RecyclerViewItemClickListener listener) {
         mListener = listener;
     }
@@ -63,6 +71,11 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         return viewHolder;
     }
 
+    /**
+     * Initialise la vu avec les données de l'incident (si incident ouvert met le backgroud en vert)
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
         T item = mData.get(position);

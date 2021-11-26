@@ -16,6 +16,9 @@ import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.util.OnAsyncEventListener;
 import com.carassurance.viewmodel.IncidentViewModel;
 
+/**
+ * cette class affiche l'interface detaillé d'un incident et permet de le modifié ou de l'annulé s'il est en status ouvert
+ */
 public class EditIncidentActivity extends BaseActivity {
     private TextView email;
     private TextView plate;
@@ -142,6 +145,10 @@ public class EditIncidentActivity extends BaseActivity {
         });
 
     }
+
+    /**
+     * goToincident retourne à l'activity des incidents standart
+     */
     public void goToincident(){
         Intent i = new Intent( this , IncidentsActivity. class );
         startActivity(i);

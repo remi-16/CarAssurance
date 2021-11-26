@@ -20,6 +20,9 @@ import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.ui.report.ReportVM;
 import com.carassurance.viewmodel.CarListViewModel;
 
+/**
+ * Adapter qui va designer la listes des voitures
+ */
 public class CustomAdapter extends BaseAdapter {
     Context context;
     String plate[];

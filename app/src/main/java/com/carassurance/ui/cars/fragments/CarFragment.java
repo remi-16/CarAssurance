@@ -1,10 +1,7 @@
 package com.carassurance.ui.cars.fragments;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,32 +11,21 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.carassurance.BaseApp;
 import com.carassurance.R;
 import com.carassurance.database.entity.CarEntity;
-import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.BaseActivity;
-import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.ui.cars.EditCarActivity;
-import com.carassurance.ui.incidents.EditIncidentActivity;
-import com.carassurance.ui.incidents.IncidentsActivity;
-import com.carassurance.ui.incidents.RecyclerAdapter;
-import com.carassurance.viewmodel.CarListByOwnerViewModel;
 import com.carassurance.viewmodel.CarListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-
+/**
+ * Cette classe est le Fagment contenant la liste de voitures de l'utlisateurs
+ */
 public class CarFragment extends Fragment {
 
     private View view;
@@ -54,7 +40,6 @@ public class CarFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        //      viewModel = new ViewModelProvider((ViewModelStoreOwner) getActivity()).get(CarListByOwnerViewModel.class);
         view= inflater.inflate(R.layout.fragment_car, container, false);
         mButtou= (Button) view.findViewById(R.id.buttonAddCar);
         mButtou .setOnClickListener( new View.OnClickListener() {
@@ -66,15 +51,8 @@ public class CarFragment extends Fragment {
                 getActivity().startActivity(i);
             }
         });
-        // Bundle bundle = this.getArguments();
-        // cars = (ArrayList<CarEntity>) bundle.getSerializable("cars");
+
         mListView = (ListView) view.findViewById(R.id.carsListView);
-
-        //  Bundle bundle = this.getArguments();
-        // cars = (ArrayList<CarEntity>) bundle.getSerializable("cars");
-        mListView = (ListView) view.findViewById(R.id.carsListView);
-
-
 
         return view;
     }
@@ -96,6 +74,9 @@ public class CarFragment extends Fragment {
         startActivity(i);
     }
 
+    /**
+     * cette méthode récupère les voitures et les envoie au CustomAdapter afin de créé une liste personnalisé
+     */
     public void initVar() {
 
         BaseActivity carsActivity = (BaseActivity) getActivity();

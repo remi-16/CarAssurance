@@ -6,7 +6,9 @@ import android.os.Bundle;
 import com.carassurance.R;
 import com.carassurance.ui.report.ReportActivity;
 
-
+/**
+ * Class Main qui lance loginActivity
+ */
 public class MainActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +20,7 @@ public class MainActivity extends BaseActivity{
         Intent intent = null;
 
         //Pour test Matt
-        intent = new Intent(this, ReportActivity.class);
+        intent = new Intent(this, LoginActivity.class);
 
         //intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

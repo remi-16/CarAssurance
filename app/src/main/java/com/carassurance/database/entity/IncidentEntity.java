@@ -144,7 +144,7 @@ public class IncidentEntity {
     }
 
     public void setDescription(String description) {
-        description = description;
+        this.description = description;
     }
 
     public String getStatus() {
@@ -152,6 +152,6 @@ public class IncidentEntity {
     }
 
     public void setStatus(String status) {
-        status = status;
+        this.status = status;
     }
 }

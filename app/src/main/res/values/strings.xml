@@ -12,6 +12,7 @@
     <string name="buttonCars">Mes véhicules</string>
     <string name="buttonReport">Déclarer un sinistre</string>
     <string name="buttonIncidents">Mes Incidents</string>
+    <string name="text_dark_theme">Dark theme</string>
     <string name="error_invalid_email">email invalide</string>
     <string name="error_incorrect_password">mot de passe incorrecte</string>
     <string name="report_type">Sélectionnez un type de sinistre</string>
