@@ -24,6 +24,7 @@ import com.carassurance.ui.cars.fragments.CarFragment;
 import com.carassurance.ui.report.fragments.ReportIncidentTypeFragment;
 import com.carassurance.viewmodel.CarListByOwnerViewModel;
 import com.carassurance.viewmodel.IncidentListByOwnerViewModel;
+import com.carassurance.viewmodel.IncidentViewModel;
 import com.carassurance.viewmodel.UserViewModel;
 
 import java.util.ArrayList;

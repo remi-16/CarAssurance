@@ -113,7 +113,6 @@ public class CarFragment extends Fragment {
         mListView.setAdapter(customAdapter);
 
 
-
     }
 
 }

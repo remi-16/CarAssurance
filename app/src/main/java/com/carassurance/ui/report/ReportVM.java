@@ -2,6 +2,7 @@ package com.carassurance.ui.report;
 
 import android.content.ClipData;
 
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -20,6 +21,15 @@ public class ReportVM extends ViewModel {
     private String description;
     private String status;
     private Boolean checkNext;
+    private int actualFragment;
+
+    public int getActualFragment() {
+        return actualFragment;
+    }
+
+    public void setActualFragment(int actualFragment) {
+        this.actualFragment = actualFragment;
+    }
 
     public ReportVM() {
         checkNext = false;

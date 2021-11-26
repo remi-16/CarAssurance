@@ -11,10 +11,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import com.carassurance.R;
 import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.ui.cars.EditCarActivity;
 import com.carassurance.ui.report.ReportActivity;
+import com.carassurance.ui.report.ReportVM;
 import com.carassurance.viewmodel.CarListViewModel;
 
 public class CustomAdapter extends BaseAdapter {
@@ -31,6 +34,7 @@ public class CustomAdapter extends BaseAdapter {
         this.activity = a;
         this.plate = plate;
         this.icone = icone;
+
 
         inflter = (LayoutInflater.from(applicationContext));
     }
@@ -56,11 +60,21 @@ public class CustomAdapter extends BaseAdapter {
         TextView platetxt = (TextView) view.findViewById(R.id.plate);
         ImageView icon = (ImageView) view.findViewById(R.id.icon);
         Button btn =(Button) view.findViewById(R.id.edit_car);
+
+        if(activity.getLocalClassName().equals("ui.report.ReportActivity")){
+            btn.setText("Selectionner");
+        }
+
+
+
         btn .setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(activity.getLocalClassName().equals("ui.cars.CarsActivity"))
-                goToCars(plate[i]);
+                    goToCars(plate[i]);
+
+                //if(activity.getLocalClassName().equals("ui.report.ReportActivity"))
+
             }
         });
         platetxt.setText(plate[i]);

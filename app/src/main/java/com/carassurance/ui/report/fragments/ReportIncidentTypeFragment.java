@@ -79,6 +79,7 @@ public class ReportIncidentTypeFragment extends Fragment implements View.OnClick
         View result = inflater.inflate(R.layout.fragment_report_incident_type, container, false);
 
         viewModel = new ViewModelProvider(requireActivity()).get(ReportVM.class);
+        viewModel.setActualFragment(1);
 
         ReportActivity reportActivity = (ReportActivity) getActivity();
         this.mIncidentTypes = reportActivity.mIncidentTypes;
