@@ -14,4 +14,16 @@
         android:clickable="true">
     </item>
 
+    <item
+        android:id="@+id/tb_menu"
+        android:title="Menu"
+        android:clickable="true">
+    </item>
+
+    <item
+        android:id="@+id/tb_quit"
+        android:title="Déconnecter"
+        android:clickable="true">
+    </item>
+
 </menu>

@@ -20,7 +20,6 @@ public class ReportVM extends ViewModel {
     private String urlMoreInfo;
     private String description;
     private String status;
-    private Boolean checkNext;
     private int actualFragment;
 
     public int getActualFragment() {
@@ -29,18 +28,6 @@ public class ReportVM extends ViewModel {
 
     public void setActualFragment(int actualFragment) {
         this.actualFragment = actualFragment;
-    }
-
-    public ReportVM() {
-        checkNext = false;
-    }
-
-    public Boolean getCheckNext() {
-        return checkNext;
-    }
-
-    public void setCheckNext(Boolean checkNext) {
-        this.checkNext = checkNext;
     }
 
     public String getClient() {

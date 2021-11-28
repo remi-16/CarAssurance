@@ -4,6 +4,6 @@
     <SwitchPreference
         android:key="theme_mode"
         android:defaultValue="false"
-        android:title="@string/text_dark_theme" />
+        android:title="Thème sombre" />
 
     </PreferenceScreen>

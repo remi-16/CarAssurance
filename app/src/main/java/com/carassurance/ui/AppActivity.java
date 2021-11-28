@@ -104,4 +104,9 @@ public class AppActivity extends BaseActivity{
         Intent i = new Intent( this , IncidentsActivity. class );
         startActivity(i);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

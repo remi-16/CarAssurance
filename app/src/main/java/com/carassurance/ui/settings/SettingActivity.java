@@ -15,4 +15,8 @@ public class SettingActivity extends BaseActivity {
         toggle.setDrawerIndicatorEnabled(false);
         mUrgencyLayout.setVisibility(View.GONE);
     }
+    @Override
+    public void onBackPressed() {
+
+    }
 }

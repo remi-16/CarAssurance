@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
-        android:text="Cancel"
+        android:text="Annuler"
         android:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="28dp"
-        android:text="Back"
+        android:text="Retour"
         android:backgroundTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="@+id/buttonCancel"
         app:layout_constraintEnd_toStartOf="@+id/buttonCancel" />
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="28dp"
-        android:text="Next"
+        android:text="Suivant"
         android:backgroundTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="@+id/buttonCancel"
         app:layout_constraintStart_toEndOf="@+id/buttonCancel" />

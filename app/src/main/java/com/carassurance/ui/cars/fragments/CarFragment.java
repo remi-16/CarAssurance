@@ -89,7 +89,8 @@ public class CarFragment extends Fragment {
             mCarsImage[i]=R.drawable.iconecar;
             i=i+1;
         }
-        customAdapter = new CustomAdapter(getActivity(), getActivity().getApplicationContext(), mCarsPlate, mCarsImage);
+       // customAdapter = new CustomAdapter(getActivity(), getActivity().getApplicationContext(), mCarsPlate, mCarsImage);
+        customAdapter = new CustomAdapter(getActivity(), getActivity().getApplicationContext(), mCars);
 
         mListView.setAdapter(customAdapter);
 

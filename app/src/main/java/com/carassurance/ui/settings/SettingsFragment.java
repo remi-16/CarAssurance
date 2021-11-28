@@ -56,6 +56,7 @@ public class SettingsFragment  extends PreferenceFragment implements SharedPrefe
     }
 
 
+
     @Override
     public void onResume() {
         super.onResume();

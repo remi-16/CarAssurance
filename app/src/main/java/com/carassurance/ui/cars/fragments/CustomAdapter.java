@@ -3,6 +3,7 @@ package com.carassurance.ui.cars.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.carassurance.R;
+import com.carassurance.database.entity.CarEntity;
 import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.ui.cars.EditCarActivity;
 import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.ui.report.ReportVM;
 import com.carassurance.viewmodel.CarListViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Adapter qui va designer la listes des voitures
@@ -29,6 +35,8 @@ public class CustomAdapter extends BaseAdapter {
     int icone[];
     LayoutInflater inflter;
     Activity activity;
+    ReportActivity mReportActivity;
+    List<CarEntity> mCars;
 
 
     public CustomAdapter(Activity a, Context applicationContext, String[] plate, int[] icone) {
@@ -37,7 +45,26 @@ public class CustomAdapter extends BaseAdapter {
         this.activity = a;
         this.plate = plate;
         this.icone = icone;
+        this.mReportActivity = (ReportActivity) a;
 
+        inflter = (LayoutInflater.from(applicationContext));
+    }
+
+    public CustomAdapter(Activity a, Context applicationContext, List<CarEntity> mCars) {
+        this.context = applicationContext;
+        this.activity = a;
+        this.mCars = mCars;
+        if(activity.getLocalClassName().equals("ui.report.ReportActivity")){
+        this.mReportActivity = (ReportActivity) a;
+        }
+        plate = new String[mCars.size()];
+        icone =  new int[mCars.size()];
+        int i=0;
+        for (CarEntity car: mCars) {
+            plate[i]=car.getPlate();
+            icone[i]=R.drawable.iconecar;
+            i=i+1;
+        }
 
         inflter = (LayoutInflater.from(applicationContext));
     }
@@ -65,7 +92,7 @@ public class CustomAdapter extends BaseAdapter {
         Button btn =(Button) view.findViewById(R.id.edit_car);
 
         if(activity.getLocalClassName().equals("ui.report.ReportActivity")){
-            btn.setText("Selectionner");
+            btn.setText("Select");
         }
 
 
@@ -76,8 +103,10 @@ public class CustomAdapter extends BaseAdapter {
                 if(activity.getLocalClassName().equals("ui.cars.CarsActivity"))
                     goToCars(plate[i]);
 
-                //if(activity.getLocalClassName().equals("ui.report.ReportActivity"))
-
+                if(activity.getLocalClassName().equals("ui.report.ReportActivity"))
+                    mReportActivity.viewModel.setCar_id(mCars.get(i).getId());
+                    //mReportActivity.viewModel.setCheckNext(true);
+                    btn.setBackgroundColor(Color.BLUE);
             }
         });
         platetxt.setText(plate[i]);

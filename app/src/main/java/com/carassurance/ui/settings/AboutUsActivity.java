@@ -3,13 +3,23 @@ package com.carassurance.ui.settings;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import com.carassurance.R;
+import android.view.View;
 
-public class AboutUsActivity extends AppCompatActivity {
+import com.carassurance.R;
+import com.carassurance.ui.BaseActivity;
+
+public class AboutUsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+        getLayoutInflater().inflate(R.layout.activity_about_us, frameLayout);
+        toggle.setDrawerIndicatorEnabled(false);
+        mUrgencyLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

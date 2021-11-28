@@ -101,9 +101,12 @@ public abstract class BaseActivity  extends AppCompatActivity implements Navigat
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (this.getLocalClassName().equals("ui.LoginActivity")){
 
-        if (menuItem.getItemId() == R.id.setting) {
-            mDrawerLayout.openDrawer(GravityCompat.START);
+        }else{
+            if (menuItem.getItemId() == R.id.setting) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
         }
 
         return super.onOptionsItemSelected(menuItem);
@@ -124,7 +127,13 @@ public abstract class BaseActivity  extends AppCompatActivity implements Navigat
                 break;
             case R.id.tb_about:
                 intent = new Intent(this, AboutUsActivity.class);
-
+                break;
+            case R.id.tb_quit:
+                intent = new Intent(this, LoginActivity.class);
+                break;
+            case R.id.tb_menu:
+                intent = new Intent(this, AppActivity.class);
+                break;
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);

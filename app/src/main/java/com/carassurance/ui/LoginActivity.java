@@ -99,4 +99,9 @@ public class LoginActivity extends BaseActivity{
         Intent i = new Intent( this , AppActivity. class );
         startActivity(i);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
