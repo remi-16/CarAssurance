@@ -10,7 +10,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class HashPassword {
 
-
+    /**
+     * Cette methode hash le mot de passe de l'utilisateur
+     * @param password
+     * @return
+     */
     public String hash(String password){
 
         String sha256hex;

@@ -1,16 +1,18 @@
 package com.carassurance.database.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 
-@Entity
-public class UserEntity {
-    @PrimaryKey
-    private int user_id;
 
+@Entity(tableName = "users", primaryKeys = {"email"})
+public class UserEntity {
+
+    @NonNull
     @ColumnInfo(name = "email")
     private String email;
 
@@ -23,27 +25,28 @@ public class UserEntity {
     @ColumnInfo(name = "password")
     private String password;
 
-    private ArrayList<CarEntity> cars;
 
 
 
-    public UserEntity(String email, String lastname, String firstname, String password) {
+    @Ignore
+    public UserEntity(){
+
+    }
+    public UserEntity(@NonNull String email, @NonNull String lastname, @NonNull String firstname, @NonNull String password) {
         this.email = email;
         this.lastname = lastname;
         this.firstname = firstname;
         this.password = password;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
 
-
+    @NonNull
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+
+    public void setEmail( @NonNull String email) {
         this.email = email;
     }
 
@@ -51,7 +54,7 @@ public class UserEntity {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public void setLastname(@NonNull String lastname) {
         this.lastname = lastname;
     }
 
@@ -59,7 +62,7 @@ public class UserEntity {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstname( @NonNull String firstname) {
         this.firstname = firstname;
     }
 
@@ -67,16 +70,22 @@ public class UserEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NonNull String password) {
         this.password = password;
     }
 
-    public ArrayList<CarEntity> getCars() {
-        return cars;
-    }
 
-    public void setCars(ArrayList<CarEntity> cars) {
-        this.cars = cars;
+    @Override
+    public boolean equals (Object object) {
+        if (object == null) return false;
+        if (object == this) return true;
+        if (!(object instanceof UserEntity)) return false;
+        UserEntity user = (UserEntity) object;
+        if (this.email.equals(user.getEmail()) && this.password.equals(user.getPassword())) {
+            return  true;
+        }
+
+      return false;
     }
 
 

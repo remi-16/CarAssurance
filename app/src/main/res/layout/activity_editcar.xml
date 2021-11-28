@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/txt_modele"
+        android:layout_width="112dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="32dp"
+        android:text="modele"
+        app:layout_constraintStart_toEndOf="@+id/txt_fixeModele"
+        app:layout_constraintTop_toBottomOf="@+id/txt_brand"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txt_color"
+        android:layout_width="112dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="40dp"
+        android:text="couleur"
+        app:layout_constraintStart_toEndOf="@+id/txt_fixcolor"
+        app:layout_constraintTop_toBottomOf="@+id/txt_modele"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txt_fixeplate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="112dp"
+        android:text="Plaque d'immatriculation"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txt_plate"
+        android:layout_width="115dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="96dp"
+        android:text="plaque"
+        app:layout_constraintStart_toEndOf="@+id/txt_fixeplate"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txt_brand"
+        android:layout_width="119dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="32dp"
+        android:text="brand"
+        app:layout_constraintStart_toEndOf="@+id/txt_fixbrand"
+        app:layout_constraintTop_toBottomOf="@+id/txt_plate"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txt_fixeModele"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="48dp"
+        android:text="Modèle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_fixbrand"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txt_fixbrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="48dp"
+        android:text="Marque"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_fixeplate"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txt_fixcolor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="64dp"
+        android:text="Couleur"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_fixeModele"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_editcar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="396dp"
+        android:text="Modifier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_savecar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="396dp"
+        android:text="Sauvegarder"
+        app:layout_constraintStart_toStartOf="@+id/btn_editcar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_addcar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="468dp"
+        android:text="Ajouter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="540dp"
+        android:text="Supprimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
