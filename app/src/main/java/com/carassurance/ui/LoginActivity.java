@@ -1,8 +1,6 @@
 package com.carassurance.ui;
 
 
-import static com.carassurance.database.AppDatabase.initializeData;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
 import com.carassurance.BaseApp;
 import com.carassurance.R;
-
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.encryption.HashPassword;
 
