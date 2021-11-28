@@ -16,6 +16,7 @@ import com.carassurance.database.entity.CarEntity;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.AppActivity;
 import com.carassurance.ui.BaseActivity;
+import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.util.OnAsyncEventListener;
 import com.carassurance.viewmodel.CarViewModel;
 import com.carassurance.viewmodel.UserViewModel;
@@ -181,7 +182,13 @@ public class EditCarActivity extends BaseActivity {
 
                             @Override
                             public void onSuccess() {
-                                goToCar();
+                                if (getIntent().getExtras().getString("activity").equals("ui.report.ReportActivity"))
+                                {
+                                    goToReport();
+                                }
+                                else{
+                                    goToCar();
+                                }
                             }
 
                             @Override
@@ -193,6 +200,12 @@ public class EditCarActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+    private void goToReport() {
+        Intent i = new Intent( this , ReportActivity. class );
+        startActivity(i);
+
     }
 
     /**

@@ -15,7 +15,10 @@ import android.widget.EditText;
 import com.carassurance.R;
 import com.carassurance.ui.report.ReportVM;
 
-
+/**
+ * Saisie de la description par l'utilisateur. Sauvé dans le viewModel après la saisie.
+ * Affichage des données existantes si présentes dans le viewModel (en cas de changement de fragments)
+ */
 public class ReportDescriptionFragment extends Fragment {
 
     private ReportVM viewModel;

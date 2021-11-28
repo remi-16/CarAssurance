@@ -27,12 +27,12 @@ import com.carassurance.viewmodel.IncidentViewModel;
 import java.util.Calendar;
 import java.util.Date;
 
-/*
-Cette activité permet l'ajout d'un nouvel incident en se basant sur plusieurs fragments.
-Les boutons Suivant, Retour et Annuler sont liés à l'activité et non aux différents fragments.
-La gestion des prochains et prédécents fragments est gérée ici.
-La communication des données se fait via la classe ReportVM qui permet à chaque fragments d'avoir accès au même viewModel.
-Une fois les données entrées, l'ajout à la base de donnée se fait via les données du viewModel et d'autres générées.
+/**
+    Cette activité permet l'ajout d'un nouvel incident en se basant sur plusieurs fragments.
+    Les boutons Suivant, Retour et Annuler sont liés à l'activité et non aux différents fragments.
+    La gestion des prochains et prédécents fragments est gérée ici.
+    La communication des données se fait via la classe ReportVM qui permet à chaque fragments d'avoir accès au même viewModel.
+    Une fois les données entrées, l'ajout à la base de donnée se fait via les données du viewModel et d'autres générées.
  */
 public class ReportActivity extends BaseActivity implements View.OnClickListener {
 
@@ -88,9 +88,9 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
         });
     }
 
-    /*
-    Gestion des boutons au bas de l'écran. Le bouton suivant est verrouillé si les informations n'ont pas été entrées.
-    L'utilisateur peut revenir au fragment précédent et inversément en conservant ses données grâce au popBackStack().
+    /**
+        Gestion des boutons au bas de l'écran. Le bouton suivant est verrouillé si les informations n'ont pas été entrées.
+        L'utilisateur peut revenir au fragment précédent et inversément en conservant ses données grâce au popBackStack().
      */
     @Override
     public void onClick(View view) {
@@ -123,7 +123,9 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
-    //Remplace le fragment actuel en fonction de celui demandé par la méthode onClick()
+    /**
+     * Remplace le fragment actuel en fonction de celui demandé par la méthode onClick()
+     */
     private void replaceFragment(Class fragment){
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
@@ -132,6 +134,9 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
                 .commit();
     }
 
+    /**
+     * Récupération user, génération date du jour et ajout de l'incident via les données du viewModel enregistrées par les fragments
+     */
     private void insertIncident(){
         String useremail = settings.getString(PREFS_USER, null);
         Date date = Calendar.getInstance().getTime();
@@ -151,6 +156,10 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
         });
     }
 
+    /**
+     * Popup pour confirmer à l'utilisateur la sauvegarde de son incident avec un bref résumé
+     * @param incidentEntity
+     */
     private void confirmationPopup(IncidentEntity incidentEntity){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

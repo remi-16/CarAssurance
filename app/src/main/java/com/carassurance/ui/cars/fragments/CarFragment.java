@@ -47,7 +47,7 @@ public class CarFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), EditCarActivity. class );
                 i.putExtra("value",false);
-
+                i.putExtra("activity", getActivity().getLocalClassName());
                 getActivity().startActivity(i);
             }
         });

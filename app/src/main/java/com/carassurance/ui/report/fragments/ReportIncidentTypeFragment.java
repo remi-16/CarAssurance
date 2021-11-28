@@ -16,11 +16,13 @@ import com.carassurance.R;
 import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.ui.report.ReportVM;
 
-
+/**
+ * Choix du type d'incident. En cas d'accident, un popup demande à l'utilisateur s'il y a des blessés.
+ * Le bouton suivant est verrouillé tant qu'un choix n'a pas été fait (via l'activité)
+ */
 public class ReportIncidentTypeFragment extends Fragment {
 
     private ReportVM viewModel;
-
     private RadioGroup mRadioGroup;
     private RadioButton mRadioButton1;
     private RadioButton mRadioButton2;
@@ -28,12 +30,9 @@ public class ReportIncidentTypeFragment extends Fragment {
     private RadioButton mRadioButton4;
     private String[] mIncidentTypes;
 
-
-
     public ReportIncidentTypeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,10 +54,13 @@ public class ReportIncidentTypeFragment extends Fragment {
 
         initButtons(result);
 
-
         return result;
     }
 
+    /**
+     * Initialisation des radioButtons et gestion du listener
+     * @param result
+     */
     private void initButtons(View result) {
 
         mRadioGroup = result.findViewById(R.id.incidentTypeRadioGroup);
@@ -71,7 +73,6 @@ public class ReportIncidentTypeFragment extends Fragment {
         mRadioButton2.setText(mIncidentTypes[1]);
         mRadioButton3.setText(mIncidentTypes[2]);
         mRadioButton4.setText(mIncidentTypes[3]);
-
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -98,7 +99,9 @@ public class ReportIncidentTypeFragment extends Fragment {
         });
     }
 
-
+    /**
+     * Popup demandant s'il y a eu des blessés ou non
+     */
     private void injuryPopup(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -109,6 +112,4 @@ public class ReportIncidentTypeFragment extends Fragment {
                 .create()
                 .show();
     }
-
-
 }
