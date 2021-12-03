@@ -103,10 +103,11 @@ public class CustomAdapter extends BaseAdapter {
                 if(activity.getLocalClassName().equals("ui.cars.CarsActivity"))
                     goToCars(plate[i]);
 
-                if(activity.getLocalClassName().equals("ui.report.ReportActivity"))
+                if(activity.getLocalClassName().equals("ui.report.ReportActivity")) {
                     mReportActivity.viewModel.setCar_id(mCars.get(i).getId());
                     //mReportActivity.viewModel.setCheckNext(true);
                     btn.setBackgroundColor(Color.BLUE);
+                }
             }
         });
         platetxt.setText(plate[i]);
