@@ -27,6 +27,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -48,6 +51,8 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.4.0-beta01'
     implementation 'androidx.room:room-runtime:2.4.0-beta01'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha03'
-    implementation platform('com.google.firebase:firebase-bom:29.0.1')
+    implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+
 }

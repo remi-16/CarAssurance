@@ -23,6 +23,7 @@ public class LoginActivity extends BaseActivity{
     private EditText username;
     private EditText password;
     private Button login;
+    private Button createAccount;
     private CheckBox stayConnect;
     private UserRepository repository;
 
@@ -38,6 +39,7 @@ public class LoginActivity extends BaseActivity{
         username = findViewById(R.id.edit_username);
         password = findViewById(R.id.edit_password);
         login = findViewById(R.id.buttonLogin);
+        createAccount = findViewById(R.id.buttonCreateAccount);
         repository = ((BaseApp) getApplication()).getUserRepository();
 
 
@@ -45,8 +47,15 @@ public class LoginActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
 
-                initialUser(username.getText().toString());
+                //initialUser(username.getText().toString());
 
+            }
+        });
+
+        createAccount .setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAccountCreation();
             }
         });
 
@@ -56,7 +65,7 @@ public class LoginActivity extends BaseActivity{
      * cette methode vérifie si l'utilisateur existe et connect l'utilisateur s'il existe
      * @param email
      */
-    public void initialUser(String email){
+   /* public void initialUser(String email){
         HashPassword hashPassword = new HashPassword();
 
 
@@ -88,13 +97,18 @@ public class LoginActivity extends BaseActivity{
             }
         });
 
-    }
+    }*/
 
     /**
      * cette methode redirige sur app activity
      */
     public void goToApp(){
         Intent i = new Intent( this , AppActivity. class );
+        startActivity(i);
+    }
+
+    public void goToAccountCreation(){
+        Intent i = new Intent( this , CreateAccountActivity. class );
         startActivity(i);
     }
 

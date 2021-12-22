@@ -9,34 +9,22 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 
 
-@Entity(tableName = "users", primaryKeys = {"email"})
+
+//@Entity(tableName = "users", primaryKeys = {"email"})
 public class UserEntity {
 
-    @NonNull
-    @ColumnInfo(name = "email")
     private String email;
-
-    @ColumnInfo(name = "lastname")
+    private String firstname;
     private String lastname;
 
-    @ColumnInfo(name = "firstname")
-    private String firstname;
 
-    @ColumnInfo(name = "password")
-    private String password;
-
-
-
-
-    @Ignore
     public UserEntity(){
-
     }
-    public UserEntity(@NonNull String email, @NonNull String lastname, @NonNull String firstname, @NonNull String password) {
+
+    public UserEntity(@NonNull String email, @NonNull String lastname, @NonNull String firstname) {
         this.email = email;
         this.lastname = lastname;
         this.firstname = firstname;
-        this.password = password;
     }
 
 
@@ -44,7 +32,6 @@ public class UserEntity {
     public String getEmail() {
         return email;
     }
-
 
     public void setEmail( @NonNull String email) {
         this.email = email;
@@ -66,13 +53,6 @@ public class UserEntity {
         this.firstname = firstname;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(@NonNull String password) {
-        this.password = password;
-    }
 
 
     @Override
@@ -81,7 +61,7 @@ public class UserEntity {
         if (object == this) return true;
         if (!(object instanceof UserEntity)) return false;
         UserEntity user = (UserEntity) object;
-        if (this.email.equals(user.getEmail()) && this.password.equals(user.getPassword())) {
+        if (this.email.equals(user.getEmail())) {
             return  true;
         }
 

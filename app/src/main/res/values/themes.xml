@@ -20,4 +20,10 @@
     <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
         <item name="android:src">@drawable/setting</item>
     </style>
+    <style name="Theme.CarAssurance.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.CarAssurance.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.CarAssurance.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

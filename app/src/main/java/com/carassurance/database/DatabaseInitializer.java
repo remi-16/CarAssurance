@@ -21,8 +21,8 @@ public class DatabaseInitializer {
     }
 
     private static void addUser(final AppDatabase db,  final String email, final String firstName,
-                                  final String lastName, final String password) {
-        UserEntity user = new UserEntity(email, firstName, lastName, password);
+                                  final String lastName) {
+        UserEntity user = new UserEntity(email, firstName, lastName);
         db.userDao().insert(user);
     }
     private static void addCar(final AppDatabase db,  final String plate, final String brand,
@@ -48,13 +48,13 @@ public class DatabaseInitializer {
 
 
 
-        addUser(db, "remi.cohu@gmail.com","Cohu","Rémi", hashPassword.hash("Soleil123"));
+       /* addUser(db, "remi.cohu@gmail.com","Cohu","Rémi");
         try {
             // Let's ensure that the user are already stored in the database before we continue.
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         addCar(db,"FR339484", "Mazda", "dynamyx","Blanc", "remi.cohu@gmail.com" );
         try {
             // Let's ensure that the car are already stored in the database before we continue.
