@@ -28,6 +28,7 @@
         <activity android:name=".ui.incidents.EditIncidentActivity" />
         <activity android:name=".ui.report.ReportActivity" />
         <activity android:name=".ui.incidents.IncidentsActivity" />
+        <activity android:name=".ui.CreateAccountActivity" />
     </application>
 
 </manifest>

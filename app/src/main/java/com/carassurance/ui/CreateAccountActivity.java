@@ -35,11 +35,11 @@ public class CreateAccountActivity extends BaseActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        name.findViewById(R.id.createName);
-        firstname.findViewById(R.id.createFirstname);
-        email.findViewById(R.id.createEmailAddress);
-        password.findViewById(R.id.createPassword);
-        createAccount.findViewById(R.id.createAccountButton);
+        name = findViewById(R.id.createName);
+        firstname = findViewById(R.id.createFirstname);
+        email = findViewById(R.id.createEmailAddress);
+        password = findViewById(R.id.createPassword);
+        createAccount = findViewById(R.id.createAccountButton);
 
         createAccount .setOnClickListener( new View.OnClickListener() {
             @Override
