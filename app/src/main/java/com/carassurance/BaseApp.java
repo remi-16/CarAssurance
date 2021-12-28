@@ -6,6 +6,7 @@ import com.carassurance.database.AppDatabase;
 import com.carassurance.database.repository.CarRepository;
 import com.carassurance.database.repository.IncidentRepository;
 import com.carassurance.database.repository.UserRepository;
+import com.carassurance.database.repository.UserRepositoryF;
 
 public class BaseApp extends Application {
 
@@ -29,4 +30,16 @@ public class BaseApp extends Application {
     public IncidentRepository getIncidentRepository() {
         return IncidentRepository.getInstance();
     }
+
+   /* public CarRepositoryF getCarRepository() {
+        return CarRepository.getInstance();
+    }*/
+
+    public UserRepositoryF getUserRepositoryF() {
+        return UserRepositoryF.getInstance();
+    }
+
+    /*public IncidentRepositoryF getIncidentRepository() {
+        return IncidentRepository.getInstance();
+    }*/
 }

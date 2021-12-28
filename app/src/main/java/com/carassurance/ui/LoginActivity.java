@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.carassurance.BaseApp;
 import com.carassurance.R;
 import com.carassurance.database.repository.UserRepository;
+import com.carassurance.database.repository.UserRepositoryF;
 import com.carassurance.encryption.HashPassword;
 
 
@@ -25,7 +26,7 @@ public class LoginActivity extends BaseActivity{
     private Button login;
     private Button createAccount;
     private CheckBox stayConnect;
-    private UserRepository repository;
+    private UserRepositoryF repository;
 
 
 
@@ -40,14 +41,14 @@ public class LoginActivity extends BaseActivity{
         password = findViewById(R.id.edit_password);
         login = findViewById(R.id.buttonLogin);
         createAccount = findViewById(R.id.buttonCreateAccount);
-        repository = ((BaseApp) getApplication()).getUserRepository();
+        repository = ((BaseApp) getApplication()).getUserRepositoryF();
 
 
         login .setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //initialUser(username.getText().toString());
+                initialUser(username.getText().toString(), password.getText().toString());
 
             }
         });
@@ -65,39 +66,24 @@ public class LoginActivity extends BaseActivity{
      * cette methode vérifie si l'utilisateur existe et connect l'utilisateur s'il existe
      * @param email
      */
-   /* public void initialUser(String email){
-        HashPassword hashPassword = new HashPassword();
+    public void initialUser(String email, String pwd){
 
-
-        repository.getUser(email, getApplication()).observe(LoginActivity.this, userEntity -> {
-            if (userEntity != null) {
-                user=userEntity;
-                if(user.getPassword().equals(hashPassword.hash(password.getText().toString()))){
-
-
-                    // We need an Editor object to make preference changes.
-                    // All objects are from android.context.Context
-                    SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-                    editor.putString(BaseActivity.PREFS_USER, userEntity.getEmail());
-                    editor.apply();
-
-                    username.setText("");
-                    password.setText("");
-                    goToApp();
-                } else {
-                    password.setError(getString(R.string.error_incorrect_password));
-                    password.requestFocus();
-                    password.setText("");
-                }
+        repository.signIn(email, pwd, task -> {
+            if (task.isSuccessful()) {
+                SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+                editor.putString(BaseActivity.PREFS_USER, email);
+                username.setText("");
+                password.setText("");
+                goToApp();
             } else {
-                username.setError(getString(R.string.error_invalid_email));
+                username.setError(getString(R.string.error_incorrect_password));
                 username.requestFocus();
                 password.setText("");
 
             }
         });
 
-    }*/
+    }
 
     /**
      * cette methode redirige sur app activity
