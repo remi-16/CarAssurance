@@ -67,11 +67,11 @@ public class LoginActivity extends BaseActivity{
      * @param email
      */
     public void initialUser(String email, String pwd){
-
+        String mail = email;
         repository.signIn(email, pwd, task -> {
             if (task.isSuccessful()) {
                 SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-                editor.putString(BaseActivity.PREFS_USER, email);
+                editor.putString(BaseActivity.PREFS_USER, mail);
                 username.setText("");
                 password.setText("");
                 goToApp();

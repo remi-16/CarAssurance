@@ -12,10 +12,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.carassurance.R;
 import com.carassurance.database.entity.UserEntity;
+import com.carassurance.database.entity.UserEntityF;
 import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.ui.incidents.IncidentsActivity;
 import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.viewmodel.UserViewModel;
+import com.carassurance.viewmodel.UserViewModelF;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Class AppActivity est l'activité principale de notre application
@@ -27,9 +30,9 @@ public class AppActivity extends BaseActivity{
     private TextView lastname;
     private TextView firstname;
     private TextView email;
-    private UserViewModel viewModel;
+    private UserViewModelF viewModel;
 
-    private UserEntity user;
+    private UserEntityF user;
 
 
     @Override
@@ -49,8 +52,13 @@ public class AppActivity extends BaseActivity{
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         String useremail = settings.getString(PREFS_USER, null);
 
-        UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), useremail);
-        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
+        UserViewModelF.Factory factory = new UserViewModelF.Factory(
+                getApplication(),
+                FirebaseAuth.getInstance().getCurrentUser().getUid()
+        );
+
+
+        viewModel = ViewModelProviders.of(this, factory).get(UserViewModelF.class);
         viewModel.getUser().observe(this, userEntity -> {
             if (userEntity != null) {
                 user = userEntity;
