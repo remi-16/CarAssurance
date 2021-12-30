@@ -9,9 +9,12 @@ import android.widget.TextView;
 import com.carassurance.BaseApp;
 import com.carassurance.R;
 import com.carassurance.database.repository.UserRepository;
+import com.carassurance.database.repository.UserRepositoryF;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.cars.fragments.CarFragment;
 import com.carassurance.viewmodel.UserViewModel;
+import com.carassurance.viewmodel.UserViewModelF;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * cette class affiche l'interafce de toutes les voitures d'un utilisateur
@@ -19,7 +22,7 @@ import com.carassurance.viewmodel.UserViewModel;
 public class CarsActivity extends BaseActivity {
 
     private TextView textCar;
-    private UserRepository repository  ;
+    private UserRepositoryF repository  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,7 @@ public class CarsActivity extends BaseActivity {
         toggle.setDrawerIndicatorEnabled(false);
         mUrgencyLayout.setVisibility(View.GONE);
         textCar = (TextView) findViewById(R.id.MyCars);
-        repository= ((BaseApp) getApplication()).getUserRepository();
+        repository= ((BaseApp) getApplication()).getUserRepositoryF();
         initvar();
 
 
@@ -39,10 +42,16 @@ public class CarsActivity extends BaseActivity {
      */
     private void initvar(){
        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-        String useremail = settings.getString(PREFS_USER, null);
-        repository.getAllCarByOwner(useremail, getApplication()).observe(CarsActivity.this, userEntity -> {
-            if (userEntity != null) {
-                mCars = userEntity.get(0).cars;
+        String userID;
+
+        UserViewModelF.Factory factory = new UserViewModelF.Factory(
+                getApplication(),
+                userID = FirebaseAuth.getInstance().getCurrentUser().getUid()
+        );
+
+        repository.getAllCarByOwner(userID).observe(CarsActivity.this, carEntityFList -> {
+            if (carEntityFList != null) {
+                mCars = carEntityFList;
 
                 getSupportFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)

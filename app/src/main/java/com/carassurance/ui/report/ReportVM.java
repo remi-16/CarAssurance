@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey;
 public class ReportVM extends ViewModel {
 
     private String client;
-    private Long car_id;
+    private String car_id;
     private String location;
     private String date;
     private String type;
@@ -38,11 +38,11 @@ public class ReportVM extends ViewModel {
         this.client = client;
     }
 
-    public Long getCar_id() {
+    public String getCar_id() {
         return car_id;
     }
 
-    public void setCar_id(Long car_id) {
+    public void setCar_id(String car_id) {
         this.car_id = car_id;
     }
 

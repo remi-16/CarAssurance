@@ -13,13 +13,17 @@ import androidx.lifecycle.ViewModelProviders;
 import com.carassurance.BaseApp;
 import com.carassurance.R;
 import com.carassurance.database.entity.CarEntity;
+import com.carassurance.database.entity.CarEntityF;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.AppActivity;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.report.ReportActivity;
 import com.carassurance.util.OnAsyncEventListener;
 import com.carassurance.viewmodel.CarViewModel;
+import com.carassurance.viewmodel.CarViewModelF;
 import com.carassurance.viewmodel.UserViewModel;
+import com.carassurance.viewmodel.UserViewModelF;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -44,8 +48,8 @@ public class EditCarActivity extends BaseActivity {
         AddOrEdit = addOrEdit;
     }
 
-    private CarViewModel viewModel;
-    public CarEntity mCar;
+    private CarViewModelF viewModel;
+    public CarEntityF mCar;
     public boolean AddOrEdit;
 
 
@@ -73,10 +77,10 @@ public class EditCarActivity extends BaseActivity {
         if (AddOrEdit==true){
             btndel.setVisibility(View.VISIBLE);
             btnEdit.setVisibility(View.VISIBLE);
-            String plate = getIntent().getExtras().getString("plate");
+            String idCar = getIntent().getExtras().getString("id");
 
-            CarViewModel.Factory factory = new CarViewModel.Factory(getApplication(), plate);
-            viewModel = ViewModelProviders.of(this, factory).get(CarViewModel.class);
+            CarViewModelF.Factory factory = new CarViewModelF.Factory(getApplication(), idCar);
+            viewModel = ViewModelProviders.of(this, factory).get(CarViewModelF.class);
             viewModel.getCar().observe(this, carEntity -> {
                 if (carEntity != null) {
                     mCar = carEntity;
@@ -106,7 +110,7 @@ public class EditCarActivity extends BaseActivity {
             btndel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewModel.deletCar(mCar, new OnAsyncEventListener() {
+                    viewModel.delete(mCar, new OnAsyncEventListener() {
                         @Override
                         public void onSuccess() {
                             goToApp();
@@ -126,7 +130,7 @@ public class EditCarActivity extends BaseActivity {
                     mCar.setBrand(txtBrand.getText().toString());
                     mCar.setPlate(txtplate.getText().toString());
                     mCar.setModel(txtModele.getText().toString());
-                    viewModel.updateCar(mCar, new OnAsyncEventListener() {
+                    viewModel.update(mCar, new OnAsyncEventListener() {
                         @Override
                         public void onSuccess() {
                             goToApp();
@@ -143,8 +147,8 @@ public class EditCarActivity extends BaseActivity {
         }
         if(AddOrEdit==false){
             btnadd.setVisibility(View.VISIBLE);
-            CarViewModel.Factory factory = new CarViewModel.Factory(getApplication(),"");
-            viewModel = ViewModelProviders.of(this, factory).get(CarViewModel.class);
+            CarViewModelF.Factory factory = new CarViewModelF.Factory(getApplication(),"");
+            viewModel = ViewModelProviders.of(this, factory).get(CarViewModelF.class);
             btnadd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -169,16 +173,20 @@ public class EditCarActivity extends BaseActivity {
                         txtModele.requestFocus();
                     }
                     if (!color.isEmpty() && !brand.isEmpty() && !plate.isEmpty() && !model.isEmpty()){
-                        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-                        String useremail = settings.getString(PREFS_USER, null);
-                        CarEntity c = new CarEntity();
+                        String owner;
+                        UserViewModelF.Factory factory = new UserViewModelF.Factory(
+                                getApplication(),
+                                owner =  FirebaseAuth.getInstance().getCurrentUser().getUid()
+                        );
+                        CarEntityF c = new CarEntityF();
                         c.setColor(color);
                         c.setBrand(brand);
                         c.setPlate(plate);
                         c.setModel(model);
-                        c.setOwner(useremail);
+                        c.setOwner(owner);
 
-                        viewModel.insertCar(c, new OnAsyncEventListener() {
+
+                        viewModel.insert(c, new OnAsyncEventListener() {
 
                             @Override
                             public void onSuccess() {

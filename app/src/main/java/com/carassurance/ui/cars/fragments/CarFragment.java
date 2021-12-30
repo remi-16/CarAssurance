@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.carassurance.R;
 import com.carassurance.database.entity.CarEntity;
+import com.carassurance.database.entity.CarEntityF;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.cars.EditCarActivity;
@@ -29,8 +30,7 @@ import java.util.List;
 public class CarFragment extends Fragment {
 
     private View view;
-    private List<CarEntity> mCars;
-    private ArrayList<CarEntity> cars;
+    private List<CarEntityF> mCars;
     private Button mButtou;
     private ListView mListView;
     private CarListViewModel viewModel;
@@ -84,7 +84,7 @@ public class CarFragment extends Fragment {
         String[] mCarsPlate = new String[mCars.size()];
         int[] mCarsImage =  new int[mCars.size()];
         int i=0;
-          for (CarEntity car: mCars) {
+          for (CarEntityF car: mCars) {
             mCarsPlate[i]=car.getPlate();
             mCarsImage[i]=R.drawable.iconecar;
             i=i+1;

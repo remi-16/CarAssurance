@@ -7,8 +7,10 @@ import androidx.lifecycle.LiveData;
 
 import com.carassurance.BaseApp;
 import com.carassurance.database.async.user.CreateUser;
+import com.carassurance.database.entity.CarEntityF;
 import com.carassurance.database.entity.UserEntity;
 import com.carassurance.database.entity.UserEntityF;
+import com.carassurance.database.firebase.CarListLiveData;
 import com.carassurance.database.firebase.UserLiveData;
 import com.carassurance.database.pojo.CarsWithUser;
 import com.carassurance.util.OnAsyncEventListener;
@@ -92,13 +94,14 @@ public class UserRepositoryF {
                 });
     }
 
-    public LiveData<List<CarsWithUser>> getAllCarByOwner(final String id, Application application) {
-        return ((BaseApp) application).getDatabase().userDao().getAllCarByOwner(id);
+    public LiveData<List<CarEntityF>> getAllCarByOwner(final String owner) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(owner)
+                .child("cars");
+        return new CarListLiveData(reference, owner);
     }
 
-    public LiveData<List<UserEntity>> getAllUsers(Application application) {
-        return ((BaseApp) application).getDatabase().userDao().getAll();
-    }
 
 }
 

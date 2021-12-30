@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.carassurance.R;
 import com.carassurance.database.entity.CarEntity;
+import com.carassurance.database.entity.CarEntityF;
 import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.ui.cars.EditCarActivity;
 import com.carassurance.ui.report.ReportActivity;
@@ -36,7 +37,7 @@ public class CustomAdapter extends BaseAdapter {
     LayoutInflater inflter;
     Activity activity;
     ReportActivity mReportActivity;
-    List<CarEntity> mCars;
+    List<CarEntityF> mCars;
 
 
     public CustomAdapter(Activity a, Context applicationContext, String[] plate, int[] icone) {
@@ -50,17 +51,18 @@ public class CustomAdapter extends BaseAdapter {
         inflter = (LayoutInflater.from(applicationContext));
     }
 
-    public CustomAdapter(Activity a, Context applicationContext, List<CarEntity> mCars) {
+    public CustomAdapter(Activity a, Context applicationContext, List<CarEntityF> mCars) {
         this.context = applicationContext;
         this.activity = a;
         this.mCars = mCars;
         if(activity.getLocalClassName().equals("ui.report.ReportActivity")){
         this.mReportActivity = (ReportActivity) a;
         }
+
         plate = new String[mCars.size()];
         icone =  new int[mCars.size()];
         int i=0;
-        for (CarEntity car: mCars) {
+        for (CarEntityF car: mCars) {
             plate[i]=car.getPlate();
             icone[i]=R.drawable.iconecar;
             i=i+1;
@@ -101,7 +103,7 @@ public class CustomAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if(activity.getLocalClassName().equals("ui.cars.CarsActivity"))
-                    goToCars(plate[i]);
+                    goToCars(mCars.get(i).getId());
 
                 if(activity.getLocalClassName().equals("ui.report.ReportActivity")) {
                     mReportActivity.viewModel.setCar_id(mCars.get(i).getId());
@@ -115,11 +117,11 @@ public class CustomAdapter extends BaseAdapter {
         return view;
     }
 
-    public void goToCars(String plate){
+    public void goToCars(String id){
 
         Intent i = new Intent(activity, EditCarActivity. class );
-        String platecar = plate;
-        i.putExtra("plate",platecar);
+        String idcar = id;
+        i.putExtra("id",idcar);
         i.putExtra("value",true);
 
         activity.startActivity(i);

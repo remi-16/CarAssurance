@@ -15,14 +15,20 @@ import androidx.lifecycle.ViewModelProviders;
 import com.carassurance.BaseApp;
 import com.carassurance.R;
 import com.carassurance.database.entity.IncidentEntity;
+import com.carassurance.database.entity.IncidentEntityF;
 import com.carassurance.database.repository.UserRepository;
+import com.carassurance.database.repository.UserRepositoryF;
 import com.carassurance.ui.AppActivity;
 import com.carassurance.ui.BaseActivity;
+import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.ui.cars.fragments.CarFragment;
 import com.carassurance.ui.report.fragments.ReportDescriptionFragment;
 import com.carassurance.ui.report.fragments.ReportIncidentTypeFragment;
 import com.carassurance.util.OnAsyncEventListener;
 import com.carassurance.viewmodel.IncidentViewModel;
+import com.carassurance.viewmodel.IncidentViewModelF;
+import com.carassurance.viewmodel.UserViewModelF;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -38,8 +44,8 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
 
     public ReportVM viewModel;
     private SharedPreferences settings;
-    private UserRepository mUserRepository;
-    private IncidentViewModel mIncidentViewModel;
+    private UserRepositoryF mUserRepository;
+    private IncidentViewModelF mIncidentViewModel;
     private Button mCancelButton;
     private Button mNextButton;
     private Button mBackButton;
@@ -53,7 +59,7 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
         viewModel.getSelectedItem().observe(this, item -> {
         });
 
-        mUserRepository = ((BaseApp) getApplication()).getUserRepository();
+        mUserRepository = ((BaseApp) getApplication()).getUserRepositoryF();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -74,16 +80,19 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
         mNextButton.setOnClickListener(this);
         mBackButton.setOnClickListener(this);
 
-        IncidentViewModel.Factory factory = new IncidentViewModel.Factory(getApplication(), null);
-        mIncidentViewModel = ViewModelProviders.of(this, factory).get(IncidentViewModel.class);
+        IncidentViewModelF.Factory factory = new IncidentViewModelF.Factory(getApplication(), null, null );
+        mIncidentViewModel = ViewModelProviders.of(this, factory).get(IncidentViewModelF.class);
 
-        settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
+        String userID;
 
-        String useremail = settings.getString(PREFS_USER, null);
+        UserViewModelF.Factory f = new UserViewModelF.Factory(
+                getApplication(),
+                userID = FirebaseAuth.getInstance().getCurrentUser().getUid()
+        );
 
-        mUserRepository.getAllCarByOwner(useremail, getApplication()).observe(this, userEntity -> {
-            if (userEntity != null) {
-                mCars = userEntity.get(0).cars;
+        mUserRepository.getAllCarByOwner(userID).observe(ReportActivity.this, carEntityFList -> {
+            if (carEntityFList != null) {
+                mCars = carEntityFList;
             }
         });
     }
@@ -138,15 +147,20 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
      * Récupération user, génération date du jour et ajout de l'incident via les données du viewModel enregistrées par les fragments
      */
     private void insertIncident(){
-        String useremail = settings.getString(PREFS_USER, null);
+        String owner;
+        UserViewModelF.Factory factory = new UserViewModelF.Factory(
+                getApplication(),
+                owner =  FirebaseAuth.getInstance().getCurrentUser().getUid()
+        );
+
         Date date = Calendar.getInstance().getTime();
 
 
-        IncidentEntity incidentEntity = new IncidentEntity(useremail,viewModel.getCar_id(),"test", DateFormat.format("dd.MM.yyyy", date).toString(),viewModel.getType(),viewModel.getInjured(),"",viewModel.getDescription());
-        mIncidentViewModel.create(incidentEntity, new OnAsyncEventListener() {
+        IncidentEntityF incidentEntityF = new IncidentEntityF(owner,viewModel.getCar_id(),"test", DateFormat.format("dd.MM.yyyy", date).toString(),viewModel.getType(),viewModel.getInjured(),"",viewModel.getDescription());
+        mIncidentViewModel.create(incidentEntityF, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
-                confirmationPopup(incidentEntity);
+                confirmationPopup(incidentEntityF);
             }
 
             @Override
@@ -160,7 +174,7 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
      * Popup pour confirmer à l'utilisateur la sauvegarde de son incident avec un bref résumé
      * @param incidentEntity
      */
-    private void confirmationPopup(IncidentEntity incidentEntity){
+    private void confirmationPopup(IncidentEntityF incidentEntity){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle("Résumé")

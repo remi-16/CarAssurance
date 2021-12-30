@@ -20,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.carassurance.R;
 import com.carassurance.database.entity.CarEntity;
+import com.carassurance.database.entity.CarEntityF;
 import com.carassurance.database.entity.UserEntity;
 import com.carassurance.ui.settings.AboutUsActivity;
 import com.carassurance.ui.settings.SettingActivity;
@@ -42,7 +43,7 @@ public abstract class BaseActivity  extends AppCompatActivity implements Navigat
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
-    public List<CarEntity> mCars;
+    public List<CarEntityF> mCars;
     public Boolean themeMode;
 
 

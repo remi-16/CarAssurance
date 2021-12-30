@@ -4,7 +4,9 @@ import android.app.Application;
 
 import com.carassurance.database.AppDatabase;
 import com.carassurance.database.repository.CarRepository;
+import com.carassurance.database.repository.CarRepositoryF;
 import com.carassurance.database.repository.IncidentRepository;
+import com.carassurance.database.repository.IncidentRepositoryF;
 import com.carassurance.database.repository.UserRepository;
 import com.carassurance.database.repository.UserRepositoryF;
 
@@ -31,15 +33,15 @@ public class BaseApp extends Application {
         return IncidentRepository.getInstance();
     }
 
-   /* public CarRepositoryF getCarRepository() {
-        return CarRepository.getInstance();
-    }*/
+   public CarRepositoryF getCarRepositoryF() {
+        return CarRepositoryF.getInstance();
+    }
 
     public UserRepositoryF getUserRepositoryF() {
         return UserRepositoryF.getInstance();
     }
 
-    /*public IncidentRepositoryF getIncidentRepository() {
-        return IncidentRepository.getInstance();
-    }*/
+    public IncidentRepositoryF getIncidentRepositoryF() {
+        return IncidentRepositoryF.getInstance();
+    }
 }
