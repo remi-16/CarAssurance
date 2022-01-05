@@ -1,30 +1,41 @@
 package com.carassurance.database.repository;
 
-import android.app.Application;
-
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.lifecycle.LiveData;
 
-import com.carassurance.BaseApp;
-import com.carassurance.database.AppDatabase;
-import com.carassurance.database.async.incident.CreateIncident;
-import com.carassurance.database.async.incident.DeleteIncident;
-import com.carassurance.database.async.incident.UpdateIncident;
-import com.carassurance.database.entity.IncidentEntity;
+import com.carassurance.database.entity.CarEntityF;
 import com.carassurance.database.entity.IncidentEntityF;
+import com.carassurance.database.firebase.CarIncidentsListLiveData;
+import com.carassurance.database.firebase.CarListLiveData;
 import com.carassurance.database.firebase.IncidentLiveData;
+import com.carassurance.database.firebase.IncidentsListLiveData;
+import com.carassurance.database.firebase.UserIncidentsListLiveData;
 import com.carassurance.database.pojo.IncidentWithCar;
+import com.carassurance.database.pojo.IncidentWithCarF;
+import com.carassurance.database.pojo.IncidentsWithCars;
+import com.carassurance.database.pojo.IncidentsWithCarsF;
+import com.carassurance.database.pojo.IncidentsWithUserF;
+import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.util.OnAsyncEventListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class IncidentRepositoryF {
     private static final String TAG = "IncidentRepositoryF";
     private static IncidentRepositoryF instance;
+    private CarRepositoryF carRepositoryF;
 
     private IncidentRepositoryF() {
+        carRepositoryF = new CarRepositoryF();
     }
 
     public static IncidentRepositoryF getInstance() {
@@ -38,22 +49,18 @@ public class IncidentRepositoryF {
         return instance;
     }
 
-    public LiveData<List<IncidentEntity>> getAllIncidentByUser(final String email, Application application) {
-        return AppDatabase.getInstance(application).incidentDao().getAllIncidentsByClient(email);
+
+
+
+    public LiveData<List<IncidentWithCarF>> getAllIncidentWithCar(final String owner) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(owner)
+                .child("cars");
+        return new IncidentsListLiveData(reference, owner);
     }
 
-    public LiveData<List<IncidentWithCar>> getAllIncidentWithCar(final String id, Application application) {
-        return ((BaseApp) application).getDatabase().incidentDao().getAllIncidentsWithCarByClient(id);
-    }
 
-    public LiveData<List<IncidentEntity>> getAllIncident(Application application) {
-        return AppDatabase.getInstance(application).incidentDao().getAllIncidents();
-    }
-
-    public LiveData<IncidentEntity> getIncidentById(final Long id, Application application) {
-        return AppDatabase.getInstance(application).incidentDao().getById(id);
-
-    }
     public LiveData<IncidentEntityF> getIncidentById(final String incidentId, final String carId) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("users")

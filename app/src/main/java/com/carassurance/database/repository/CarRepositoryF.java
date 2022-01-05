@@ -25,7 +25,7 @@ public class CarRepositoryF {
         private static final String TAG = "CarRepositoryF";
         private static CarRepositoryF instance;
 
-        private CarRepositoryF() {
+        CarRepositoryF() {
         }
 
         public static CarRepositoryF getInstance() {

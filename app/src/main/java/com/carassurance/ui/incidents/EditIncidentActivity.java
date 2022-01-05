@@ -11,10 +11,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.carassurance.R;
 import com.carassurance.database.entity.IncidentEntity;
+import com.carassurance.database.entity.IncidentEntityF;
 import com.carassurance.ui.BaseActivity;
 import com.carassurance.ui.cars.CarsActivity;
 import com.carassurance.util.OnAsyncEventListener;
 import com.carassurance.viewmodel.IncidentViewModel;
+import com.carassurance.viewmodel.IncidentViewModelF;
 
 /**
  * cette class affiche l'interface detaillé d'un incident et permet de le modifié ou de l'annulé s'il est en status ouvert
@@ -34,8 +36,8 @@ public class EditIncidentActivity extends BaseActivity {
     private Button save;
 
 
-    private IncidentEntity mIncident;
-    private IncidentViewModel viewModel;
+    private IncidentEntityF mIncident;
+    private IncidentViewModelF viewModel;
 
 
     @Override
@@ -64,7 +66,7 @@ public class EditIncidentActivity extends BaseActivity {
 
 
         IncidentViewModel.Factory factory = new IncidentViewModel.Factory(getApplication(), incidentId);
-        viewModel = ViewModelProviders.of(this, factory).get(IncidentViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(IncidentViewModelF.class);
         viewModel.getIncident().observe(this, incidentEntity -> {
             if (incidentEntity != null) {
                 mIncident=incidentEntity;

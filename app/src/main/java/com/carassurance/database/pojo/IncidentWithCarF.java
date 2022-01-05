@@ -15,5 +15,8 @@ public class IncidentWithCarF {
 
     public CarEntityF car;
 
-
+    public IncidentWithCarF(IncidentEntityF incidents, CarEntityF car) {
+        this.incidents = incidents;
+        this.car = car;
+    }
 }

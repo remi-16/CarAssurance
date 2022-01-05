@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.carassurance.R;
 import com.carassurance.database.entity.IncidentEntity;
 import com.carassurance.database.pojo.IncidentWithCar;
+import com.carassurance.database.pojo.IncidentWithCarF;
 import com.carassurance.database.pojo.IncidentsWithCars;
 import com.carassurance.util.RecyclerViewItemClickListener;
 
@@ -84,11 +85,11 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         String car = null;
         String status = null;
 
-        if (item.getClass().equals(IncidentWithCar.class)){
-            id = String.valueOf(((IncidentWithCar) item).incidents.getId());
-            date = ((IncidentWithCar) item).incidents.getDate();
-            car = ((IncidentWithCar) item).car.getPlate()+"";
-            status = ((IncidentWithCar) item).incidents.getStatus();
+        if (item.getClass().equals(IncidentWithCarF.class)){
+            id = String.valueOf(((IncidentWithCarF) item).incidents.getId());
+            date = ((IncidentWithCarF) item).incidents.getDate();
+            car = ((IncidentWithCarF) item).car.getPlate()+"";
+            status = ((IncidentWithCarF) item).incidents.getStatus();
             if (status.equalsIgnoreCase("Ouvert")){
                 holder.view.setBackgroundColor(0xff00ff00);
             }
@@ -127,17 +128,17 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    if (mData instanceof IncidentWithCar) {
-                        return ((IncidentWithCar) mData.get(oldItemPosition)).incidents.equals(((IncidentWithCar) data.get(newItemPosition)).incidents.getId());
+                    if (mData instanceof IncidentWithCarF) {
+                        return ((IncidentWithCarF) mData.get(oldItemPosition)).incidents.equals(((IncidentWithCarF) data.get(newItemPosition)).incidents.getId());
                     }
                     return false;
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    if (mData instanceof IncidentWithCar) {
-                        IncidentWithCar newIncidentWithCar = (IncidentWithCar) data.get(newItemPosition);
-                        IncidentWithCar oldIncidentWithCar = (IncidentWithCar) mData.get(oldItemPosition);
+                    if (mData instanceof IncidentWithCarF) {
+                        IncidentWithCarF newIncidentWithCar = (IncidentWithCarF) data.get(newItemPosition);
+                        IncidentWithCarF oldIncidentWithCar = (IncidentWithCarF) mData.get(oldItemPosition);
                         return newIncidentWithCar.incidents.equals(oldIncidentWithCar.incidents.getId())
                                 && Objects.equals(newIncidentWithCar.incidents.getCar_id(), oldIncidentWithCar.incidents.getCar_id());
                     }

@@ -80,7 +80,7 @@ public class CreateAccountActivity extends BaseActivity {
                     }
                 });
         // [END create_user_with_email]*/
-        if (pwd.length() < 5) {
+        if (pwd.length() < 6) {
             password.setError(getString(R.string.error_invalid_password));
             password.requestFocus();
             password.setText("");

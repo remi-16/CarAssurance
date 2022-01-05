@@ -15,8 +15,12 @@ import java.util.List;
 import com.carassurance.BaseApp;
 import com.carassurance.R;
 import com.carassurance.database.pojo.IncidentWithCar;
+import com.carassurance.database.pojo.IncidentWithCarF;
 import com.carassurance.database.repository.IncidentRepository;
+import com.carassurance.database.repository.IncidentRepositoryF;
 import com.carassurance.ui.BaseActivity;
+import com.carassurance.viewmodel.UserViewModelF;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Class principale de l'interface ou l'utilisateur peut voir ses incidents
@@ -24,10 +28,10 @@ import com.carassurance.ui.BaseActivity;
 public class IncidentsActivity extends BaseActivity {
 
     private TextView textView;
-    private List<IncidentWithCar> mIncidents;
-    private RecyclerAdapter<IncidentWithCar> adapter;
+    private List<IncidentWithCarF> mIncidents;
+    private RecyclerAdapter<IncidentWithCarF> adapter;
     private RecyclerView recyclerView;
-    private IncidentRepository repository;
+    private IncidentRepositoryF repository;
 
 
 
@@ -48,10 +52,10 @@ public class IncidentsActivity extends BaseActivity {
 
         mIncidents = new ArrayList<>();
 
-        adapter = new RecyclerAdapter<IncidentWithCar>((v, position) -> {
+        adapter = new RecyclerAdapter<IncidentWithCarF>((v, position) -> {
             Intent intent=new Intent(IncidentsActivity.this, EditIncidentActivity.class);
 
-            Long incidentId = mIncidents.get(position).incidents.getId();
+            String incidentId = mIncidents.get(position).incidents.getId();
             intent.putExtra("incidentId",incidentId);
             String plate = mIncidents.get(position).car.getPlate();
             intent.putExtra("plate",plate);
@@ -74,12 +78,16 @@ public class IncidentsActivity extends BaseActivity {
      * Initialise le viewModel et transmet chaque incident de l'utilisateur dans une recycleView
      */
     private void setupViewModels() {
-        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-        String useremail = settings.getString(PREFS_USER, null);
+        String userID;
 
-        repository= ((BaseApp) getApplication()).getIncidentRepository();
+        UserViewModelF.Factory factory = new UserViewModelF.Factory(
+                getApplication(),
+                userID = FirebaseAuth.getInstance().getCurrentUser().getUid()
+        );
 
-        repository.getAllIncidentWithCar(useremail, getApplication()).observe(IncidentsActivity.this, incident -> {
+        repository= ((BaseApp) getApplication()).getIncidentRepositoryF();
+
+        repository.getAllIncidentWithCar(userID).observe(IncidentsActivity.this, incident -> {
             if (incident != null) {
                 mIncidents = incident;
                 adapter.setData(mIncidents);
