@@ -41,10 +41,15 @@ public class IncidentLiveData extends LiveData<IncidentEntityF> {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             IncidentEntityF entity = dataSnapshot.getValue(IncidentEntityF.class);
-            entity.setId(dataSnapshot.getKey());
-            entity.setClient(client);
-            entity.setCar_id(car_id);
-            setValue(entity);
+            try{
+                entity.setId(dataSnapshot.getKey());
+                entity.setClient(client);
+                entity.setCar_id(car_id);
+                setValue(entity);
+            }catch(Exception e){
+                //pour la suppréssion
+            }
+
         }
 
         @Override

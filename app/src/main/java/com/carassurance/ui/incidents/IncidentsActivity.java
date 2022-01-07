@@ -58,6 +58,8 @@ public class IncidentsActivity extends BaseActivity {
             String incidentId = mIncidents.get(position).incidents.getId();
             intent.putExtra("incidentId",incidentId);
             String plate = mIncidents.get(position).car.getPlate();
+            String idCar = mIncidents.get(position).car.getId();
+            intent.putExtra("idCar",idCar);
             intent.putExtra("plate",plate);
             startActivity(intent);
         });

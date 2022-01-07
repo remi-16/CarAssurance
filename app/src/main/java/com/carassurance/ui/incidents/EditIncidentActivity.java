@@ -46,8 +46,9 @@ public class EditIncidentActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_editincidents, frameLayout);
         toggle.setDrawerIndicatorEnabled(false);
         mUrgencyLayout.setVisibility(View.GONE);
-        Long incidentId = getIntent().getLongExtra("incidentId", 0);
+        String incidentId = getIntent().getExtras().getString("incidentId");
         String plateCar = getIntent().getExtras().getString("plate");
+        String idCar = getIntent().getExtras().getString("idCar");
         email = findViewById(R.id.emailclient);
         plate= findViewById(R.id.incplate);
         status= findViewById(R.id.stat);
@@ -65,7 +66,7 @@ public class EditIncidentActivity extends BaseActivity {
         injured.setFocusable(false);
 
 
-        IncidentViewModel.Factory factory = new IncidentViewModel.Factory(getApplication(), incidentId);
+        IncidentViewModelF.Factory factory = new IncidentViewModelF.Factory(getApplication(),incidentId, idCar);
         viewModel = ViewModelProviders.of(this, factory).get(IncidentViewModelF.class);
         viewModel.getIncident().observe(this, incidentEntity -> {
             if (incidentEntity != null) {

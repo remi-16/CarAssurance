@@ -38,10 +38,15 @@ public class CarLiveData extends LiveData<CarEntityF> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            CarEntityF entity = dataSnapshot.getValue(CarEntityF.class);
-            entity.setId(dataSnapshot.getKey());
-            entity.setOwner(owner);
-            setValue(entity);
+            try{
+                CarEntityF entity = dataSnapshot.getValue(CarEntityF.class);
+                entity.setId(dataSnapshot.getKey());
+                entity.setOwner(owner);
+                setValue(entity);
+            }catch(Exception e){
+                //pour suppression
+            }
+
         }
 
         @Override
