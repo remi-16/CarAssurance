@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="200dp"
+        android:layout_marginHorizontal="30dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -17,40 +18,44 @@
             android:id="@+id/textName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="Nom"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <EditText
             android:id="@+id/createName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/textFistname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Firstname" />
+            android:text="Prénom"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <EditText
             android:id="@+id/createFirstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Firstname" />
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email" />
+            android:text="Email"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <EditText
             android:id="@+id/createEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:ems="10"
             android:inputType="textEmailAddress" />
 
@@ -58,12 +63,14 @@
             android:id="@+id/textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password" />
+            android:text="Password"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <EditText
             android:id="@+id/createPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:ems="10"
             android:inputType="textPassword" />
 
@@ -71,6 +78,6 @@
             android:id="@+id/createAccountButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create" />
+            android:text="S'enregistrer" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

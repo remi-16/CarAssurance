@@ -5,9 +5,9 @@
       <map>
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_about_us.xml" value="0.36666666666666664" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_cars.xml" value="0.20520833333333333" />
-        <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_create_account.xml" value="0.31567028985507245" />
+        <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_create_account.xml" value="0.25" />
+        <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_editcar.xml" value="0.2957427536231884" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_incidents.xml" value="0.24739583333333334" />
-        <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_login.xml" value="0.31567028985507245" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/activity_report.xml" value="0.25" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/fragment_car.xml" value="0.17844202898550723" />
         <entry key="..\:/Projets/AndroidStudio/CarAssurance/app/src/main/res/layout/fragment_incident_type.xml" value="0.17147922998986828" />
@@ -27,7 +27,6 @@
         <entry key="..\:/Users/remi.MHZSA.000/OneDrive - HESSO/5eme semestre/DevMobile/Projet/CarAssurance/app/src/main/res/menu/setting_menu.xml" value="0.3625" />
         <entry key="..\:/Users/remi.MHZSA.000/OneDrive - HESSO/5eme semestre/DevMobile/Projet/CarAssurance/app/src/main/res/menu/toolbar_menu.xml" value="0.9453978159126365" />
         <entry key="..\:/Users/remi.MHZSA.000/OneDrive - HESSO/5eme semestre/DevMobile/Projet/CarAssurance/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.20729166666666668" />
-        <entry key="..\:/Users/remi.MHZSA.000/OneDrive - HESSO/5eme semestre/DevMobile/Projet/Carzurance/Firebase/CarAssurance/app/src/main/res/layout/activity_login.xml" value="0.25" />
       </map>
     </option>
   </component>

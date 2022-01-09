@@ -86,7 +86,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         String status = null;
 
         if (item.getClass().equals(IncidentWithCarF.class)){
-            id = String.valueOf(((IncidentWithCarF) item).incidents.getId());
+            id = String.valueOf(((IncidentWithCarF) item).incidents.getLocation());
             date = ((IncidentWithCarF) item).incidents.getDate();
             car = ((IncidentWithCarF) item).car.getPlate()+"";
             status = ((IncidentWithCarF) item).incidents.getStatus();
